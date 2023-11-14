@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 function Header() {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState(true);
 
   // header sticky function
   const stickyHeader = () => {
@@ -66,7 +66,7 @@ function Header() {
                 <li>Login</li>
               </Link>
               <Link to="/Signup">
-                <button className="bg-primaryColor px-8 py-2 h-[44px] flex items-center justify-center rounded-3xl text-white">
+                <button className="bg-primaryColor px-8 py-2 h-[44px] flex items-center justify-center rounded-3xl text-white duration-100 hover:scale-105">
                   Sign Up
                 </button>
               </Link>
@@ -75,7 +75,7 @@ function Header() {
           {/* menu toggle */}
           <div
             onClick={toggleMenu}
-            className="flex md:hidden bg-primaryColor w-[40px] h-[40px] items-center justify-center cursor-pointer text-white text-2xl rounded"
+            className="flex md:hidden bg-primaryColor w-[40px] h-[40px] items-center justify-center cursor-pointer text-white text-2xl rounded duration-100 hover:scale-105"
           >
             {menu ? <FiMenu /> : <IoClose />}
           </div>
