@@ -1,11 +1,10 @@
-import { Button } from '@mantine/core'
 import React from 'react'
+import Header from '../../components/header/Header'
 
 function Home() {
   return (
-    <div className='container'>
-      <h1 className='text-primaryColor'>Hello world</h1>
-      <Button >Taabo</Button>
+    <div className='w-full'>
+      <Header/>
     </div>
   )
 }
