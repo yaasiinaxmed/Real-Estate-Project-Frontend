@@ -13,7 +13,7 @@ const data = [
     propertyType: "Single-family home",
     imageUrl:
       "https://res.cloudinary.com/dcdhklrjc/image/upload/v1692612598/wwcrlzgwx04egdadyvbg.png",
-    type: "for rent",
+    type: "for sell",
     owner: {
       _id: "6553508845dab501df30d16b",
       avatar:

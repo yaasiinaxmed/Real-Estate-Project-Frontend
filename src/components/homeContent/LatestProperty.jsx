@@ -1,6 +1,6 @@
 import React from "react";
-import properties from "./data";
-import PropertyCard from "./PropertyCard";
+import properties from "../data";
+import PropertyCard from "../PropertyCard";
 import { Link } from "react-router-dom";
 
 function LatestProperty() {
