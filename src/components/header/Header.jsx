@@ -5,40 +5,46 @@ import { FiMenu } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 
 function Header() {
-  const headerRef = useRef(null)
-  const menuRef = useRef(null)
+  const headerRef = useRef(null);
+  const menuRef = useRef(null);
   const [menu, setMenu] = useState(false);
-  
+
   // header sticky function
   const stickyHeader = () => {
-   window.addEventListener("scroll", () => {
-    if(document.body.scrollTop > 70 || document.documentElement.scrollTop > 70) {
-      headerRef.current.classList.add("sticky_header")
-    } else {
-      headerRef.current.classList.remove("sticky_header")
-    }
-   });
-  }
+    window.addEventListener("scroll", () => {
+      if (
+        document.body.scrollTop > 70 ||
+        document.documentElement.scrollTop > 70
+      ) {
+        headerRef.current.classList.add("sticky_header");
+      } else {
+        headerRef.current.classList.remove("sticky_header");
+      }
+    });
+  };
 
   useEffect(() => {
-    stickyHeader()
+    stickyHeader();
 
-    return window.removeEventListener("scroll", stickyHeader )
-  }, [])
+    return window.removeEventListener("scroll", stickyHeader);
+  }, []);
 
   // menu toggle logic
   const toggleMenu = () => {
-    if(menu === true) {
-      menuRef.current.classList.add("show_menu")
-      setMenu(false)
+    if (menu === true) {
+      menuRef.current.classList.add("show_menu");
+      setMenu(false);
     } else {
-      menuRef.current.classList.remove("show_menu")
-      setMenu(true)
+      menuRef.current.classList.remove("show_menu");
+      setMenu(true);
     }
-  }
+  };
 
   return (
-    <header ref={headerRef} className=" w-full h-[70px] leading-[70px] flex items-center">
+    <header
+      ref={headerRef}
+      className=" w-full h-[70px] leading-[70px] flex items-center"
+    >
       <div className="container">
         <div className="flex justify-between items-center">
           {/* logo */}
@@ -53,20 +59,25 @@ function Header() {
               <Link to="/">
                 <li>Home</li>
               </Link>
-              <Link to="/">
+              <Link to="/Properties">
                 <li>Properties</li>
               </Link>
-              <Link to="/" className="pb-6 md:pb-0">
+              <Link to="/Login" className="pb-6 md:pb-0">
                 <li>Login</li>
               </Link>
-              <button className="bg-primaryColor px-8 py-2 h-[44px] flex items-center justify-center rounded-3xl text-white">
-                Sign Up
-              </button>
+              <Link to="/Signup">
+                <button className="bg-primaryColor px-8 py-2 h-[44px] flex items-center justify-center rounded-3xl text-white">
+                  Sign Up
+                </button>
+              </Link>
             </ul>
           </div>
           {/* menu toggle */}
-          <div onClick={toggleMenu} className="flex md:hidden bg-primaryColor w-[40px] h-[40px] items-center justify-center cursor-pointer text-white text-2xl rounded">
-            {menu ? <FiMenu /> : <IoClose/>}
+          <div
+            onClick={toggleMenu}
+            className="flex md:hidden bg-primaryColor w-[40px] h-[40px] items-center justify-center cursor-pointer text-white text-2xl rounded"
+          >
+            {menu ? <FiMenu /> : <IoClose />}
           </div>
         </div>
       </div>
