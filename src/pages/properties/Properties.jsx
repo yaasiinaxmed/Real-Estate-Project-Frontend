@@ -4,19 +4,20 @@ import PropertyCard from "../../components/PropertyCard";
 import SearchBar from "../../components/SearchBar";
 
 function Properties() {
-  const [filter, setFilter] = useState("") 
-  const searchData = properties.filter(property => (
-          property.country.toLowerCase().includes(filter.toLowerCase()) ||
-          property.city.toLowerCase().includes(filter.toLowerCase()) ||
-          property.address.toLowerCase().includes(filter.toLowerCase()) ||
-          property.propertyType.toLowerCase().includes(filter.toLowerCase())
-        ))
+  const [filter, setFilter] = useState("");
+  const searchData = properties.filter(
+    (property) =>
+      property.country.toLowerCase().includes(filter.toLowerCase()) ||
+      property.city.toLowerCase().includes(filter.toLowerCase()) ||
+      property.address.toLowerCase().includes(filter.toLowerCase()) ||
+      property.propertyType.toLowerCase().includes(filter.toLowerCase())
+  );
 
   return (
     <div className="w-full">
       {/* cover */}
       <div className="w-full h-[200px] bg-hero bg-cover bg-center bg-no-repeat flex items-center justify-center">
-        <SearchBar filter={filter} setFilter={setFilter}/>
+        <SearchBar filter={filter} setFilter={setFilter} />
       </div>
       {/* Properties */}
       <div className="container pb-12 flex items-center justify-center flex-wrap gap-6 mt-8">

@@ -37,7 +37,7 @@ function PropertyCard({ property }) {
           </span>
         </div>
         <div className="mt-3 flex items-center justify-between">
-          <h2 className="text-lg font-medium">
+        <h2 className="text-lg font-medium">
             <NumberFormatter
               prefix="$ "
               value={property.price}
@@ -48,7 +48,7 @@ function PropertyCard({ property }) {
               / mo
             </Text>) : ""}
           </h2>
-          <Link to="/">
+          <Link to={`/Property/${property._id}/${property.title.toLowerCase().split(" ").join("-")}`}>
             <button className="bg-white text-primaryColor px-4 py-3 text-sm font-medium">
               View Details
             </button>

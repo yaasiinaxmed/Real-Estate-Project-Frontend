@@ -68,6 +68,10 @@ section {
   .text {
     font-size: 1.25rem !important;
   }
+
+  .cover-img {
+    height: 200px !important
+  }
 }
 
 @media only screen and (max-width: 400px) {

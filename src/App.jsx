@@ -14,6 +14,7 @@ import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import PropertyDetails from "./pages/properties/PropertyDetails";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/Properties" element={<Properties />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Signup" element={<SignUp />} />
+        <Route path="/Property/:id/:property" element={<PropertyDetails/>} />
       </Routes>
 
       {/* react-hot-toast container */}

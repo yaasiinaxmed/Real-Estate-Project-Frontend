@@ -1,6 +1,6 @@
 const data = [
   {
-    _id: "655354967ddb3a85b5cef82a",
+    _id: "6546922bybda9b125803e122",
     title: "Spacious apartment in downtown",
     description:
       "A beautiful and modern apartment with 3 bedrooms and 2 bathrooms, located in the heart of the city. ",
@@ -27,7 +27,7 @@ const data = [
     __v: 0,
   },
   {
-    _id: "6546920bebdc9b145803e122",
+    _id: "6546920bebda9b125803e122",
     title: "Cedar Ridge Ranch",
     description:
       "Massive opportunity to build your dream home at the base of Mummy Mountain in the 3 C's school district. Home is currently updated and very livable if your plans are to build at a later date.* Bonus * to live hillside without hillside restrictions in the town of PV. Run don't walk to capture this needle in a hay stack.",
@@ -54,7 +54,7 @@ const data = [
     __v: 0,
   },
   {
-    _id: "655355c97ddb3a85b5cef835",
+    _id: "655355c97dd13a85w5cef835",
     title: "Cedar Ridge Ranch",
     description:
       "Massive opportunity to build your dream home at the base of Mummy Mountain in the 3 C's school district. Home is currently updated and very livable if your plans are to build at a later date.* Bonus * to live hillside without hillside restrictions in the town of PV. Run don't walk to capture this needle in a hay stack.",
@@ -81,7 +81,7 @@ const data = [
     __v: 0,
   },
   {
-    _id: "655354967ddb3a85b5cef82a",
+    _id: "655354967dda2a85b5cef82a",
     title: "Spacious apartment in downtown",
     description:
       "A beautiful and modern apartment with 3 bedrooms and 2 bathrooms, located in the heart of the city. ",
@@ -156,7 +156,7 @@ const data = [
       name: "Yaasiin Ahmed",
       email: "yaskassoy@gmail.com",
     },
-    available: false,
+    available: true,
     createdAt: "2023-11-14T11:11:05.569Z",
     updatedAt: "2023-11-14T11:30:05.483Z",
     __v: 0,
