@@ -19,7 +19,7 @@ function PropertyDetails() {
         {/* cover img */}
         <figure className="w-full cover-img h-[280px] md:h-[400px] lg:h-[600px] relative">
           {/* Badge Availabe status */}
-          <div className="absolute top-2 right-3">
+          <div className="absolute top-2 left-3">
             <Badge color={property.available ? "lime" : "red"}>
               {property.available ? "Available" : "Unavailable"}
             </Badge>
