@@ -50,7 +50,7 @@ function PropertyCard({ property }) {
           </h2>
           <Link to={`/Property/${property._id}/${property.title.toLowerCase().split(" ").join("-")}`}>
             <button className="bg-white text-primaryColor px-4 py-3 text-sm font-medium">
-              View Details
+              See More
             </button>
           </Link>
         </div>
