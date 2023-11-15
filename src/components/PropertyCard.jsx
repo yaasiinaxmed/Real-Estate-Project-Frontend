@@ -18,7 +18,7 @@ function PropertyCard({ property }) {
       </figure>
       {/* Details */}
       <div className="mt-1 flex flex-col gap-3 p-4">
-        <h2 className="text-xl flex items-center gap-2">
+        <h2 className="text-xl flex items-center gap-2 text-HeadingColor">
           <ImLocation2 />{" "}
           <span className="text-lg font-medium">
             {property.address.slice(0, 8) +
@@ -28,7 +28,7 @@ function PropertyCard({ property }) {
               property.country}{" "}
           </span>
         </h2>
-        <div className="flex items-center justify-between ">
+        <div className="flex items-center justify-between text-HeadingColor">
           <span className="flex items-center text-lg gap-2">
             <IoBed /> <p className="text-sm">{property.bedrooms} Bed Rooms</p>
           </span>
@@ -37,7 +37,7 @@ function PropertyCard({ property }) {
           </span>
         </div>
         <div className="mt-3 flex items-center justify-between">
-        <h2 className="text-lg font-medium">
+        <h2 className="text-lg font-medium text-HeadingColor">
             <NumberFormatter
               prefix="$ "
               value={property.price}

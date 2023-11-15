@@ -64,7 +64,7 @@ function PropertyDetails() {
             <Text size="xl" className="font-medium">
                 Property Info
               </Text>
-            <div className="flex flex-col gap-4 sm:flex-row justify-between ">
+            <div className="flex flex-col gap-4 sm:flex-row justify-between text-HeadingColor">
               <span className="flex items-center text-sm sm:text-lg gap-2">
                 <HiHome /> <p className="text-sm">{property.propertyType}</p>
               </span>
