@@ -1,8 +1,13 @@
 import React from 'react'
+import LoginContent from '../../components/loginContent/LoginContent'
 
 function Login() {
   return (
-    <div>Login</div>
+    <section className='py-28'>
+      <div className="container flex items-center justify-center">
+        <LoginContent/>
+      </div>
+    </section>
   )
 }
 
