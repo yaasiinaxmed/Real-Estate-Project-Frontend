@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "@mantine/form";
-import { TextInput, NativeSelect, PasswordInput, Text } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { TextInput, PasswordInput, Text } from "@mantine/core";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../../store/api/AuthSlice";
+import toast from "react-hot-toast";
+import { useUserInfo } from "../../context/UserInfo";
+import { useGetUserQuery } from "../../store/api/UserSlice";
 
 function LoginContent() {
+  const { userInfo, setUserInfo } = useUserInfo();
+  const { data: user = [], refetch } = useGetUserQuery();
+  const [login] = useLoginMutation();
+  const navigate = useNavigate();
+
   const form = useForm({
     initialValues: {
       name: "",
@@ -19,13 +28,27 @@ function LoginContent() {
     },
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const { hasErrors } = form.validate();
 
     if (!hasErrors) {
-      console.log(form.values);
+      try {
+        const result = await login(form.values).unwrap();
+        toast.success(result.message);
+        // Fetch user data after successful login
+        await refetch(); // Assuming useGetUserQuery provides a refetch function
+        setUserInfo(true);
+        navigate("/");
+      } catch (error) {
+        if (error && error.data) {
+          toast.error(error.data.message);
+        } else {
+          console.error("An unexpected error occurred:", error);
+        }
+      }
     }
   };
+
   return (
     <div className="w-full md:w-2/4 xl:w-1/3 p-6 sm:p-8 rounded-lg flex flex-col shadow-[0px_0px_6px_rgb(0,0,0,0.1)]">
       <h2 className="text-3xl font-medium text-center">Login</h2>

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import properties from "../../components/data";
 import PropertyCard from "../../components/PropertyCard";
 import SearchBar from "../../components/SearchBar";
+import { useGetPropertiesQuery } from "../../store/api/PropertySlice";
+import searchImg from "../../assets/search.png"
 
 function Properties() {
+  const {data: properties = [], isLoading} = useGetPropertiesQuery()
   const [filter, setFilter] = useState("");
   const searchData = properties.filter(
     (property) =>
@@ -21,13 +23,27 @@ function Properties() {
       </div>
       {/* Properties */}
       <div className="container pb-12 flex items-center justify-center flex-wrap gap-6 mt-8">
-        {searchData.length === 0 ? (
-          <h1>No Results</h1>
-        ) : (
-          searchData.map((property) => (
-            <PropertyCard property={property} key={property._id} />
-          ))
-        )}
+      {isLoading ? (
+            <div className="flex gap-2 items-center justify-center ">
+              <span className="w-6 h-6 rounded-full border-2 border-primaryColor border-l-white animate-spin"></span>
+              Loading...
+            </div>
+          ) : (
+            <>
+            {searchData.length === 0 ? (
+              <section className="py-[3rem] flex flex-col items-center justify-center">
+                <figure className="w-[20rem]">
+                  <img src={searchImg} alt="" className="w-full"/>
+                </figure>
+                <h1>No Results Found</h1>
+              </section>
+            ) : (
+              searchData.map((property) => (
+                <PropertyCard property={property} key={property._id} />
+              ))
+            )}
+            </>
+          )}
       </div>
     </div>
   );

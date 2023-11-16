@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Css
 import "./App.css";
@@ -15,12 +15,17 @@ import SignUp from "./pages/signup/SignUp";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import PropertyDetails from "./pages/properties/PropertyDetails";
+import PrivateRoute from "./PrivateRoute";
+import AddProperty from "./pages/properties/AddProperty";
+import Profile from "./pages/Profile/Profile";
+import EditProfile from "./pages/Profile/EditProfile";
 
 function App() {
+
   return (
     <div className="w-full">
       {/* Header  */}
-      <Header/>
+      <Header />
 
       {/* Routes */}
       <Routes>
@@ -29,6 +34,13 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Signup" element={<SignUp />} />
         <Route path="/Property/:id/:property" element={<PropertyDetails/>} />
+
+        {/* Private Routes */}
+        <Route element={<PrivateRoute/>}>
+          <Route path="Add-property" element={<AddProperty/>} />
+          <Route path="Profile/:name" element={<Profile/>} />
+          <Route path="Profile/Edit" element={<EditProfile/>} />
+        </Route>
       </Routes>
 
       {/* react-hot-toast container */}

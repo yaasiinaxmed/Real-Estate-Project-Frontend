@@ -1,17 +1,19 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import properties from "../../components/data";
 import { Avatar, Badge, Group, NumberFormatter, Text } from "@mantine/core";
 import { ImLocation2 } from "react-icons/im";
 import { HiHome } from "react-icons/hi2";
 import { FaBath } from "react-icons/fa";
 import { IoBed } from "react-icons/io5";
 import Map from "../../components/propertyContent/Map";
+import { useGetPropertiesQuery } from "../../store/api/PropertySlice";
 
 function PropertyDetails() {
+  const {data: properties = []} = useGetPropertiesQuery()
   const { id } = useParams();
 
   const property = properties.find((pro) => pro._id === id);
+  console.log(property)
 
   return (
     <section>
@@ -95,7 +97,8 @@ function PropertyDetails() {
               </h2>
             </div>
             {/* owner info */}
-            <div className="flex flex-col gap-3 mt-3">
+          {property.owner !== null && (
+              <div className="flex flex-col gap-3 mt-3">
               <Text size="xl" className="font-medium">
                 Owner Info
               </Text>
@@ -125,6 +128,7 @@ function PropertyDetails() {
                 </div>
               </div>
             </div>
+          )}
           </div>
           {/*  location map */}
           <div className="w-full xl:!w-[600px]">

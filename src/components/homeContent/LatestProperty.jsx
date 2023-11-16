@@ -1,9 +1,11 @@
 import React from "react";
-import properties from "../data";
 import PropertyCard from "../PropertyCard";
 import { Link } from "react-router-dom";
+import { useGetPropertiesQuery } from "../../store/api/PropertySlice";
 
 function LatestProperty() {
+  const { data: properties = [], isLoading } = useGetPropertiesQuery();
+
   return (
     <section>
       <div className="container flex flex-col items-center ">
@@ -13,9 +15,18 @@ function LatestProperty() {
         </h2>
         {/* Properties */}
         <div className="flex items-center justify-center flex-wrap gap-6 mt-8">
-          {properties.slice(0, 6).map((property) => (
-            <PropertyCard property={property} key={property._id}/>
-          ))}
+          {isLoading ? (
+            <div className="flex gap-2 items-center justify-center ">
+              <span className="w-6 h-6 rounded-full border-2 border-primaryColor border-l-white animate-spin"></span>
+              Loading...
+            </div>
+          ) : (
+            <>
+              {properties.slice(0, 6).map((property) => (
+                <PropertyCard property={property} key={property._id} />
+              ))}
+            </>
+          )}
         </div>
         {/* button more */}
         <Link to="/Properties">

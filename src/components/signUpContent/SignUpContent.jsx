@@ -1,9 +1,15 @@
 import React from "react";
 import { useForm } from "@mantine/form";
 import { TextInput, NativeSelect, PasswordInput, Text } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSignUpMutation } from "../../store/api/AuthSlice";
+import toast from "react-hot-toast";
 
 function SignUpContent() {
+
+  const [signUp] = useSignUpMutation()
+  const navigate = useNavigate()
+
   const form = useForm({
     initialValues: {
       name: "",
@@ -24,7 +30,12 @@ function SignUpContent() {
     const {hasErrors} = form.validate()
 
     if(!hasErrors) {
-        console.log(form.values)
+        signUp(form.values).unwrap().then((result) => {
+          toast.success(result.message)
+          navigate("/Login")
+        }).catch((error) => {
+          toast.error(error.data.message)
+        })
     }
   }
 

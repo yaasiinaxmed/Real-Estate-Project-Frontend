@@ -14,12 +14,21 @@ import { BrowserRouter } from "react-router-dom";
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
 
+// redux
+import { Provider } from "react-redux";
+import { store } from "./store/index.js";
+import { UserInfoProvider } from "./context/UserInfo.jsx";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <MantineProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </MantineProvider>
+    <Provider store={store}>
+      <UserInfoProvider>
+        <MantineProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </MantineProvider>
+      </UserInfoProvider>
+    </Provider>
   </React.StrictMode>
 );
