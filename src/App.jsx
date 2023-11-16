@@ -37,9 +37,9 @@ function App() {
 
         {/* Private Routes */}
         <Route element={<PrivateRoute/>}>
-          <Route path="Add-property" element={<AddProperty/>} />
-          <Route path="Profile/:name" element={<Profile/>} />
-          <Route path="Profile/Edit" element={<EditProfile/>} />
+          <Route path="/Add-property" element={<AddProperty/>} />
+          <Route path="/Profile/:name" element={<Profile/>} />
+          <Route path="/Profile/Edit" element={<EditProfile/>} />
         </Route>
       </Routes>
 

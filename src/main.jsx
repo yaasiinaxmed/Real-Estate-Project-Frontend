@@ -22,13 +22,13 @@ import { UserInfoProvider } from "./context/UserInfo.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <UserInfoProvider>
-        <MantineProvider>
-          <BrowserRouter>
+      <BrowserRouter>
+        <UserInfoProvider>
+          <MantineProvider>
             <App />
-          </BrowserRouter>
-        </MantineProvider>
-      </UserInfoProvider>
+          </MantineProvider>
+        </UserInfoProvider>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );

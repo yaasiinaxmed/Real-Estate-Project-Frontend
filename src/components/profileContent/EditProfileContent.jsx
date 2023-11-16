@@ -20,7 +20,6 @@ function EditProfileContent() {
   const navigate = useNavigate();
 
   const [avatarUrl, setAvatarUrl] = useState(user.avatar);
-  const [fileName, setFileName] = useState("");
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
 
@@ -35,11 +34,10 @@ function EditProfileContent() {
       (err, result) => {
         if (result.event === "success") {
           setAvatarUrl(result.info.secure_url);
-          setFileName(result.info.original_filename);
         }
       }
     );
-  }, [cloudinaryRef, widgetRef]);
+  }, []);
 
   const form = useForm({
     initialValues: {
@@ -97,9 +95,10 @@ function EditProfileContent() {
         <FileInput
           control={form}
           withAsterisk
-          defa
-          label="Avatar"
-          placeholder="Choose new avatar or image"
+          mt="md"
+          size="md"
+          label="Upload Image"
+          placeholder="Upload new avatar or image"
           accept="image/*"
           onClick={() => widgetRef.current?.open()}
           {...form.getInputProps("avatar")}
@@ -108,6 +107,7 @@ function EditProfileContent() {
         <TextInput
           withAsterisk
           label="Name"
+          mt="md"
           size="md"
           placeholder="Enter your name"
           {...form.getInputProps("name")}

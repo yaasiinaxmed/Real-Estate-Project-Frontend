@@ -15,7 +15,7 @@ import { useUserInfo } from "../../context/UserInfo";
 
 function Header() {
   const { userInfo, handleLogout, handleDeleteUser } = useUserInfo();
-  const { data: user = [] } = useGetUserQuery();
+  const { data: user = {} } = useGetUserQuery();
 
   const headerRef = useRef(null);
   const menuRef = useRef(null);
@@ -114,9 +114,15 @@ function Header() {
                       </>
                     )}
                     <Menu.Label>Settings</Menu.Label>
-                    <Menu.Item leftSection={<FaUser />}>Profile</Menu.Item>
-                    <Link to='Profile/Edit' >
-                    <Menu.Item leftSection={<FaUserEdit />}>Edit Profile</Menu.Item>
+                    <Link
+                      to={user && user.name ? `/Profile/${user.name.toLowerCase().split(" ").join("-")}` : "/Profile"}
+                    >
+                      <Menu.Item leftSection={<FaUser />}>Profile</Menu.Item>
+                    </Link>
+                    <Link to="/Profile/Edit">
+                      <Menu.Item leftSection={<FaUserEdit />}>
+                        Edit Profile
+                      </Menu.Item>
                     </Link>
                     <Menu.Item
                       leftSection={<IoLogOutOutline />}
@@ -128,7 +134,11 @@ function Header() {
                     <Menu.Divider />
 
                     <Menu.Label>Danger zone</Menu.Label>
-                    <Menu.Item color="red" onClick={handleDeleteUser} leftSection={<IoTrash />}>
+                    <Menu.Item
+                      color="red"
+                      onClick={handleDeleteUser}
+                      leftSection={<IoTrash />}
+                    >
                       Delete account
                     </Menu.Item>
                   </Menu.Dropdown>
