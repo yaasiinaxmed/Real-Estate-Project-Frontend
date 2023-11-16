@@ -9,9 +9,6 @@ export default {
       colors: {
         primaryColor: "#1E88E5",
         HeadingColor: "#222222"
-      },
-      backgroundImage: {
-        "hero": `url("./src/assets/hero.jpg")`
       }
     },
   },

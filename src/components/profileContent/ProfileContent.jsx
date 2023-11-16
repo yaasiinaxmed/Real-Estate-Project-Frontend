@@ -19,7 +19,7 @@ function ProfileContent() {
       <button onClick={handleDeleteUser} className="mt-6 w-full bg-red-500 bg-opacity-90 hover:bg-opacity-100 px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 ">
         Delete Account
       </button>
-      <button onClick={handleLogout} className="mt-3 w-full bg-red-500 bg-opacity-10 border-2 border-red-300 text-red-500 hover:bg-opacity-20 px-4 py-3 text-sm flex items-center justify-center rounded-xl duration-100 ">
+      <button onClick={handleLogout} className="mt-3 w-full bg-red-500 bg-opacity-10 border-[2px] border-red-300 text-red-500 hover:bg-opacity-20 px-4 py-3 text-sm flex items-center justify-center rounded-xl duration-100 ">
         Logout
       </button>
     </div>

@@ -19,7 +19,7 @@ function Header() {
 
   const headerRef = useRef(null);
   const menuRef = useRef(null);
-  const [menu, setMenu] = useState(true);
+  const [menu, setMenu] = useState(false);
 
   // header sticky function
   const stickyHeader = () => {
