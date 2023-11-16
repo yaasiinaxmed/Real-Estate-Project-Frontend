@@ -1,8 +1,51 @@
-import React from 'react'
+import React, { useState } from "react";
+import PropertyCard from "../../components/PropertyCard";
+import { useGetPropertiesQuery } from "../../store/api/PropertySlice";
+import searchImg from "../../assets/search.png";
+import heroImg from "../../assets/hero.jpg";
+import { useGetUserQuery } from "../../store/api/UserSlice";
 
 function YourProperties() {
+
+  const { data: user = [] } = useGetUserQuery();
+  const { data: Allproperties = [], isLoading } = useGetPropertiesQuery();
+
+  const YourProperties = Allproperties.filter((pro) => pro.owner._id === user._id)
+
   return (
-    <div>YourProperties</div>
+    <div className="w-full">
+      {/* cover */}
+      <div
+        className="w-full h-[200px] bg-primaryColor opacity-90 bg-cover bg-center bg-no-repeat flex items-center justify-center"
+        style={{ backgroundImage: `url(${heroImg})` }}
+      >
+      <h2 className="my-3 font-medium text-2xl md:text-3xl text-white">Your Properties</h2>
+      </div>
+      {/* Properties */}
+      <div className="pb-12 flex items-center justify-center flex-wrap gap-6 mt-8">
+        {isLoading ? (
+          <div className="flex gap-2 items-center justify-center ">
+            <span className="w-6 h-6 rounded-full border-2 border-primaryColor border-l-white animate-spin"></span>
+            Loading...
+          </div>
+        ) : (
+          <>
+            {YourProperties.length === 0 ? (
+              <section className="py-[3rem] flex flex-col items-center justify-center">
+                <figure className="w-[20rem]">
+                  <img src={searchImg} alt="" className="w-full" />
+                </figure>
+                <h1>No Results Found</h1>
+              </section>
+            ) : (
+              YourProperties.map((property) => (
+                <PropertyCard property={property} key={property._id} />
+              ))
+            )}
+          </>
+        )}
+      </div>
+    </div>
   )
 }
 
