@@ -1,13 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "@mantine/form";
-import {
-  TextInput,
-  PasswordInput,
-  Text,
-  Avatar,
-  FileInput,
-} from "@mantine/core";
-import { Link, useNavigate } from "react-router-dom";
+import { TextInput, Avatar } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
+import { HiCamera } from "react-icons/hi2";
 import toast from "react-hot-toast";
 import {
   useGetUserQuery,
@@ -57,7 +52,6 @@ function EditProfileContent() {
     form.setFieldValue("avatar", avatarUrl);
   }, [avatarUrl, form]);
 
-
   const handleSubmit = async () => {
     const { hasErrors } = form.validate();
 
@@ -85,24 +79,19 @@ function EditProfileContent() {
           handleSubmit();
         }}
       >
-        <Avatar
-          src={avatarUrl}
-          size={120}
-          radius={120}
-          mx="auto"
-          className="my-3"
-        />
-        <FileInput
-          control={form}
-          withAsterisk
-          mt="md"
-          size="md"
-          label="Upload Image"
-          placeholder="Upload new avatar or image"
-          accept="image/*"
-          onClick={() => widgetRef.current?.open()}
-          {...form.getInputProps("avatar")}
-        />
+        <div className="flex items-center justify-center mt-3">
+          <div
+            onClick={() => widgetRef.current?.open()}
+            className="group w-[120px] relative text-cursor-pointer"
+          >
+            {/* image avatar */}
+            <Avatar src={avatarUrl} size={120} radius={120} mx="auto" />
+            {/* hover upload image */}
+            <div className="duration-300 group-hover:flex hidden cursor-pointer bg-black bg-opacity-30 absolute top-0 left-0 w-full h-full rounded-full items-center justify-center text-3xl text-white">
+              <HiCamera />
+            </div>
+          </div>
+        </div>
 
         <TextInput
           withAsterisk
