@@ -16,7 +16,7 @@ function Hero() {
         <p className="text-xl md:text-2xl text-center text-white font-normal ">
           Discover it with ease!
         </p>
-        <Link to="/Properties">
+        <Link to="/properties">
           <button className="bg-white mt-2 text-primaryColor px-8 py-2 h-[44px] font-medium flex items-center justify-center rounded-3xl duration-100 hover:scale-110 ">
             Explore Now
           </button>

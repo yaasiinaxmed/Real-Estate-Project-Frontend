@@ -19,6 +19,7 @@ import PrivateRoute from "./PrivateRoute";
 import AddProperty from "./pages/properties/AddProperty";
 import Profile from "./pages/Profile/Profile";
 import EditProfile from "./pages/Profile/EditProfile";
+import YourProperties from "./pages/properties/YourProperties";
 
 function App() {
 
@@ -30,16 +31,17 @@ function App() {
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Properties" element={<Properties />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Signup" element={<SignUp />} />
-        <Route path="/Property/:id/:property" element={<PropertyDetails/>} />
+        <Route path="/properties" element={<Properties />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/property/:id/:property" element={<PropertyDetails/>} />
 
         {/* Private Routes */}
         <Route element={<PrivateRoute/>}>
-          <Route path="/Add-property" element={<AddProperty/>} />
-          <Route path="/Profile/:name" element={<Profile/>} />
-          <Route path="/Profile/Edit" element={<EditProfile/>} />
+          <Route path="/your-properties" element={<YourProperties/>} />
+          <Route path="/add-property" element={<AddProperty/>} />
+          <Route path="/profile/:name" element={<Profile/>} />
+          <Route path="/profile/Edit" element={<EditProfile/>} />
         </Route>
       </Routes>
 

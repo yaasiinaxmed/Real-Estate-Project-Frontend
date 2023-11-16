@@ -48,7 +48,7 @@ function PropertyCard({ property }) {
               / mo
             </Text>) : ""}
           </h2>
-          <Link to={`/Property/${property._id}/${property.title.toLowerCase().split(" ").join("-")}`}>
+          <Link to={`/property/${property._id}/${property.title.toLowerCase().split(" ").join("-")}`}>
             <button className="bg-white text-primaryColor px-4 py-3 text-sm font-medium">
               See More
             </button>

@@ -81,7 +81,7 @@ function LoginContent() {
       </form>
       <Text ta="center" mt="md">
         Don't have an account?{" "}
-        <Link to="/Signup" className="text-primaryColor">
+        <Link to="/sign-up" className="text-primaryColor">
           Sign Up
         </Link>
       </Text>

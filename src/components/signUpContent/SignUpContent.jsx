@@ -32,7 +32,7 @@ function SignUpContent() {
     if(!hasErrors) {
         signUp(form.values).unwrap().then((result) => {
           toast.success(result.message)
-          navigate("/Login")
+          navigate("/login")
         }).catch((error) => {
           toast.error(error.data.message)
         })
@@ -86,7 +86,7 @@ function SignUpContent() {
       </form>
       <Text ta="center" mt="md">
           I have an account?{' '}
-          <Link to="/Login" className="text-primaryColor">
+          <Link to="/login" className="text-primaryColor">
             login
           </Link>
         </Text>

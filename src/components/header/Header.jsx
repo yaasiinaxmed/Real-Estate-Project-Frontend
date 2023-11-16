@@ -63,19 +63,19 @@ function Header() {
               <Link to="/" onClick={() => setMenu(!menu)}>
                 <li>Home</li>
               </Link>
-              <Link to="/Properties" onClick={() => setMenu(!menu)}>
+              <Link to="/properties" onClick={() => setMenu(!menu)}>
                 <li>Properties</li>
               </Link>
               {userInfo === null || userInfo === false ? (
                 <>
                   <Link
-                    to="/Login"
+                    to="/login"
                     className="pb-6 md:pb-0"
                     onClick={() => setMenu(!menu)}
                   >
                     <li>Login</li>
                   </Link>
-                  <Link to="/Signup" onClick={() => setMenu(!menu)}>
+                  <Link to="/sign-up" onClick={() => setMenu(!menu)}>
                     <button className="bg-primaryColor px-8 py-2 h-[44px] flex items-center justify-center rounded-3xl text-white duration-100 hover:scale-105">
                       Sign Up
                     </button>
@@ -105,21 +105,26 @@ function Header() {
                   <Menu.Dropdown>
                     {user.role === "owner" && (
                       <>
+                        <Link to="/add-property" onClick={() => setMenu(!menu)}>
                         <Menu.Item leftSection={<BsHouseAdd />}>
                           Add Property
                         </Menu.Item>
+                        </Link>
+                        <Link to="/your-properties" onClick={() => setMenu(!menu)}>
                         <Menu.Item leftSection={<BsHouse />}>
                           Your Properties
                         </Menu.Item>
+                        </Link>
                       </>
                     )}
                     <Menu.Label>Settings</Menu.Label>
                     <Link
-                      to={user && user.name ? `/Profile/${user.name.toLowerCase().split(" ").join("-")}` : "/Profile"}
+                      to={user && user.name ? `/profile/${user.name.toLowerCase().split(" ").join("-")}` : "/profile"}
+                      onClick={() => setMenu(!menu)}
                     >
                       <Menu.Item leftSection={<FaUser />}>Profile</Menu.Item>
                     </Link>
-                    <Link to="/Profile/Edit">
+                    <Link to="/profile/edit" onClick={() => setMenu(!menu)}>
                       <Menu.Item leftSection={<FaUserEdit />}>
                         Edit Profile
                       </Menu.Item>

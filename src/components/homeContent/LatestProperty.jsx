@@ -29,7 +29,7 @@ function LatestProperty() {
           )}
         </div>
         {/* button more */}
-        <Link to="/Properties">
+        <Link to="/properties">
           <button className="bg-primaryColor mt-10 text-white px-8 py-2 h-[44px] font-medium flex items-center justify-center rounded-3xl duration-100 hover:scale-110 ">
             View More
           </button>
