@@ -16,8 +16,8 @@ function YourProperties() {
     <div className="w-full">
       {/* cover */}
       <div
-        className="w-full h-[200px] bg-primaryColor opacity-90 bg-cover bg-center bg-no-repeat flex items-center justify-center"
-        style={{ backgroundImage: `url(${heroImg})` }}
+        className="w-full h-[200px] bg-cover bg-center bg-no-repeat flex items-center justify-center"
+        style={{ backgroundImage: `linear-gradient(to bottom , #00befe, rgba(0,0,0,0.1)), url(${heroImg})` }}
       >
       <h2 className="my-3 font-medium text-2xl md:text-3xl text-white">Your Properties</h2>
       </div>
