@@ -26,14 +26,16 @@ export const UserInfoProvider = ({ children }) => {
   };
 
   const handleDeleteUser = () => {
-    userDelete().then((result) => {
-      toast.success(result.data.message)
-      Cookies.remove("token")
-      setUserInfo(false)
-      navigate("/")
-    }).catch((error) => {
-      toast.error(error.data.message)
-    })
+    if(confirm("Do you went to delete this account?")) {
+      userDelete().then((result) => {
+        toast.success(result.data.message)
+        Cookies.remove("token")
+        setUserInfo(false)
+        navigate("/")
+      }).catch((error) => {
+        toast.error(error.data.message)
+      })
+    }
    
   }
 
