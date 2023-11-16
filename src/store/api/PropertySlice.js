@@ -58,7 +58,7 @@ export const propertySlice = createApi({
     }),
 
     // Send request
-    deleteProperty: builder.mutation({
+    sendRequest: builder.mutation({
       query: (id) => ({
         url: `properties/${id}/send_request`,
         method: "POST",
@@ -89,4 +89,4 @@ export const propertySlice = createApi({
   }),
 });
 
-export const { useGetPropertiesQuery } = propertySlice;
+export const { useGetPropertiesQuery, useAddPropertyMutation, useEditPropertyMutation, useDeletePropertyMutation, useSendRequestMutation, useGetRequestsQuery, useApproveMutation, useGetTransactionsQuery } = propertySlice;

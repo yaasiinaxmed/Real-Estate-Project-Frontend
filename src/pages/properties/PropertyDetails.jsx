@@ -7,13 +7,14 @@ import { FaBath } from "react-icons/fa";
 import { IoBed } from "react-icons/io5";
 import Map from "../../components/propertyContent/Map";
 import { useGetPropertiesQuery } from "../../store/api/PropertySlice";
+import { useGetUserQuery } from "../../store/api/UserSlice";
 
 function PropertyDetails() {
-  const {data: properties = []} = useGetPropertiesQuery()
+  const {data: properties = [], error} = useGetPropertiesQuery()
+  const { data: user = [] } = useGetUserQuery();
   const { id } = useParams();
 
-  const property = properties.find((pro) => pro._id === id);
-  console.log(property)
+  const property = properties.find((pro) => pro && pro._id === id);
 
   return (
     <section>
@@ -49,7 +50,7 @@ function PropertyDetails() {
                   className="text-HeadingColor"
                 />
 
-                {property.type === "for rent" ? (
+                {property.type.toLowerCase() === "for rent" ? (
                   <Text span fz="sm" c="dimmed">
                     / mo
                   </Text>
@@ -97,7 +98,7 @@ function PropertyDetails() {
               </h2>
             </div>
             {/* owner info */}
-          {property.owner !== null && (
+          {property.owner !== null && user && (
               <div className="flex flex-col gap-3 mt-3">
               <Text size="xl" className="font-medium">
                 Owner Info
@@ -109,7 +110,7 @@ function PropertyDetails() {
                   {/* info */}
                   <div style={{ flex: 1 }}>
                     <Text size="sm" fw={500}>
-                      {property.owner.name}
+                      {property.owner.name} {property.owner._id === user._id && ("(You)")}
                     </Text>
 
                     <Text c="dimmed" size="xs">
@@ -118,7 +119,8 @@ function PropertyDetails() {
                   </div>
                 </Group>
                 {/* buttons */}
-                <div className="flex flex-col gap-3 md:flex-row ">
+                {property.owner._id !== user._id ? (
+                  <div className="flex flex-col gap-3 md:flex-row ">
                   <button className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
                     Contact Owner
                   </button>
@@ -126,6 +128,16 @@ function PropertyDetails() {
                     Send Request
                   </button>
                 </div>
+                ) : (
+                  <div className="flex flex-col gap-3 md:flex-row ">
+                  <button className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
+                    Edit Property
+                  </button>
+                  <button className="bg-red-500 px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
+                    Delete Property
+                  </button>
+                </div>
+                )}
               </div>
             </div>
           )}

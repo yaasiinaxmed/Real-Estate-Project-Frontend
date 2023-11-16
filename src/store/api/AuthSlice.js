@@ -3,7 +3,7 @@ import Cookies from "js-cookie"
 import BASE_URL from "./BASE_URL"
 
 const setToken = (token) => {
-    Cookies.set("token", token)
+    Cookies.set("token", token, {expires: 7})
 }
 
 export const authSlice = createApi({

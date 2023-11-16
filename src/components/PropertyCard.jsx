@@ -11,7 +11,7 @@ function PropertyCard({ property }) {
       {/* image */}
       <figure className="relative w-full h-[200px]">
         {/* Badge */}
-        {property.type === "for sell" && (
+        {property.type.toLowerCase() === "for sell" && (
           <div className="absolute top-2 right-3"><Badge>For Sell</Badge></div>
         )}
         <img src={property.imageUrl} alt="" className="w-full h-full" />
@@ -44,7 +44,7 @@ function PropertyCard({ property }) {
               thousandSeparator
             />
 
-            {property.type === "for rent" ? (<Text span fz="sm" c="dimmed">
+            {property.type.toLowerCase() === "for rent" ? (<Text span fz="sm" c="dimmed">
               / mo
             </Text>) : ""}
           </h2>
