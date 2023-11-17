@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Avatar, Badge, Group, NumberFormatter, Text } from "@mantine/core";
 import { ImLocation2 } from "react-icons/im";
@@ -7,18 +7,34 @@ import { FaBath } from "react-icons/fa";
 import { IoBed } from "react-icons/io5";
 import Map from "../../components/propertyContent/Map";
 import {
+  useApproveMutation,
   useGetRequestsQuery,
-  useSendRequestMutation,
 } from "../../store/api/PropertySlice";
 import { useGetUserQuery } from "../../store/api/UserSlice";
+import toast from "react-hot-toast";
 
 function RequestDetails() {
   const { data: requests = [], error, isLoading } = useGetRequestsQuery();
   const { data: user = [] } = useGetUserQuery();
 
   const { id } = useParams();
+  const [value, setValue] = useState(false);
 
   const request = requests.find((request) => request && request._id === id);
+  const [approve] = useApproveMutation();
+
+  // Approve to Request
+  const HandleApprove = (id) => {
+    approve(id)
+      .unwrap()
+      .then((result) => {
+        toast.success(result.message);
+        setValue(true);
+      })
+      .catch((error) => {
+        toast.error(error.data.message);
+      });
+  };
 
   return (
     <section>
@@ -134,18 +150,19 @@ function RequestDetails() {
                           <div style={{ flex: 1 }}>
                             <Text size="sm" fw={500}>
                               {request?.property?.owner?.name}{" "}
-                              {request?.property?.owner?._id === user?._id &&
-                                "(You)"}
                             </Text>
                             <Text c="dimmed" size="xs">
                               {request?.property?.owner?.email}
                             </Text>
                           </div>
                         </Group>
-                        {/* button */}
+                        {/* buttons */}
                         <div className="flex flex-col gap-3 md:flex-row mt-3 md:mt-0">
+                          <button className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
+                            Contact Owner
+                          </button>
                           <button className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100">
-                            Pending..
+                            Pending approval
                           </button>
                         </div>
                       </div>
@@ -192,8 +209,11 @@ function RequestDetails() {
                             Edit Property
                           </button>
                         </Link>
-                        <button className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
-                          Approve Request
+                        <button
+                          onClick={() => HandleApprove(request._id)}
+                          className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105"
+                        >
+                          {value ? "Approve Request" : "Approved Request"}
                         </button>
                       </div>
                     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Avatar, Badge, Group, NumberFormatter, Text } from "@mantine/core";
 import { ImLocation2 } from "react-icons/im";
@@ -37,8 +37,11 @@ function PropertyDetails() {
   const HandleSendRequest = (id) => {
     sendRequest(id).unwrap().then((result) => {
       toast.success(result.message)
-      navigate("/")
     }).catch((error) => {
+      if(error.data.status === 409) {
+        toast.error(error.data.message)
+      }
+
       toast.error(error.data.message)
     })
   }
@@ -159,7 +162,7 @@ function PropertyDetails() {
                   Contact Owner
                 </button>
                 <button onClick={() => HandleSendRequest(property._id)} className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
-                  Send Request
+                Send Request
                 </button>
               </div>
               ) : (

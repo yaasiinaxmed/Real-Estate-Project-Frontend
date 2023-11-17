@@ -8,6 +8,8 @@ function YourRequests() {
 
   const { data: requests = [], isLoading } = useGetRequestsQuery();
 
+  const currentRequests = requests.filter((request) => request?.isApproved !== true)
+
   return (
     <div className="w-full">
       {/* cover */}
@@ -26,7 +28,7 @@ function YourRequests() {
           </div>
         ) : (
           <>
-            {requests.length === 0 ? (
+            {currentRequests.length === 0 ? (
               <section className="py-[3rem] flex flex-col items-center justify-center">
                 <figure className="w-[20rem]">
                   <img src={searchImg} alt="" className="w-full" />
@@ -34,7 +36,7 @@ function YourRequests() {
                 <h1>No Results Found</h1>
               </section>
             ) : (
-              requests.map((request) => (
+              currentRequests.map((request) => (
                 <RequestsCard request={request} key={request._id} />
               ))
             )}
