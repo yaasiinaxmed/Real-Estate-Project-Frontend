@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 // Css
 import "./App.css";
@@ -20,6 +20,7 @@ import AddProperty from "./pages/properties/AddProperty";
 import Profile from "./pages/Profile/Profile";
 import EditProfile from "./pages/Profile/EditProfile";
 import YourProperties from "./pages/properties/YourProperties";
+import EditProperty from "./pages/properties/EditProperty";
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
         <Route element={<PrivateRoute/>}>
           <Route path="/your-properties" element={<YourProperties/>} />
           <Route path="/add-property" element={<AddProperty/>} />
+          <Route path="/edit-property/:id/:property" element={<EditProperty/>} />
           <Route path="/profile/:name" element={<Profile/>} />
           <Route path="/profile/Edit" element={<EditProfile/>} />
         </Route>

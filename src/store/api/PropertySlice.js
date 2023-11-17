@@ -40,10 +40,10 @@ export const propertySlice = createApi({
 
     // Update property
     editProperty: builder.mutation({
-      query: ({ property, id }) => ({
+      query: ({ propertyData, id }) => ({
         url: `properties/update/${id}`,
         method: "PUT",
-        body: property,
+        body: propertyData,
       }),
       invalidatesTags: ["property"],
     }),

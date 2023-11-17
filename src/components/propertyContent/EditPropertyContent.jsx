@@ -9,37 +9,49 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { AiOutlineCloudUpload } from "react-icons/ai";
-import { useAddPropertyMutation } from "../../store/api/PropertySlice";
+import {
+  useEditPropertyMutation,
+  useGetPropertiesQuery,
+} from "../../store/api/PropertySlice";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useCountries from "../../Hooks/useCountries";
 
 function AddPropertyContent() {
+  const { data: properties = [], isLoading } = useGetPropertiesQuery();
+  const [editProperty] = useEditPropertyMutation();
 
   const data = ["Select Property Type", "House", "Villa", "Apartment"];
 
   const [step, setStep] = useState(1);
-  const [errorImg, setErrorImg] = useState(false)
-  const navigate = useNavigate()
+  const [errorImg, setErrorImg] = useState(false);
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const property = properties.find((pro) => (pro && pro._id === id) || {});
 
-  const [addProperty] = useAddPropertyMutation()
+  const { getCountries } = useCountries();
 
- const { getCountries } = useCountries();
- 
+  const getInitialFormValues = () => ({
+    country: property ? property.country : "",
+    city: property ? property.city : "",
+    address: property ? property.address : "",
+    imageUrl: property ? property.imageUrl : "",
+    title: property ? property.title : "",
+    type: property ? property.type : "",
+    description: property ? property.description : "",
+    price: property ? property.price : "",
+    propertyType: property ? property.propertyType : "",
+    bedrooms: property ? property.bedrooms : "",
+    bathrooms: property ? property.bathrooms : "",
+  });
+
+  useEffect(() => {
+    form.setValues(getInitialFormValues())
+  }, [property, id]);
+
+
   const form = useForm({
-    initialValues: {
-      country: "",
-      city: "",
-      address: "",
-      imageUrl: "",
-      title: "",
-      type: "",
-      description: "",
-      price: 0,
-      propertyType: "",
-      bedrooms: 0,
-      bathrooms: 0,
-    },
+    initialValues: getInitialFormValues(),
     validate: (values) => {
       const errors = {};
 
@@ -59,11 +71,14 @@ function AddPropertyContent() {
         if (values.title.length < 3) {
           errors.title = "Must have at least 3 characters";
         }
-        if (values.propertyType  === "Select Property Type" || !values.type.trim()) {
+        if (
+          values.propertyType === "Select Property Type" ||
+          !values.type.trim()
+        ) {
           errors.propertyType = "Please Select Property Type";
         }
-        if(values.type === "Select Type" || !values.type.trim()) {
-            errors.type = "Please Select Type"
+        if (values.type === "Select Type" || !values.type.trim()) {
+          errors.type = "Please Select Type";
         }
         if (values.description.length < 3) {
           errors.description = "Invalid description for property";
@@ -84,8 +99,10 @@ function AddPropertyContent() {
   });
 
   const handleNextStep = (e) => {
-    e.preventDefault()
+    e.preventDefault(); 
+
     const { hasErrors } = form.validate();
+
     if (step === 2) {
       if (!form.values.imageUrl) {
         setErrorImg(true);
@@ -98,7 +115,6 @@ function AddPropertyContent() {
       setStep((current) => current + 1);
     }
   };
-  
 
   const handlePreviousStep = () => {
     setStep(step - 1);
@@ -131,23 +147,26 @@ function AddPropertyContent() {
     setupCloudinaryWidget();
   }, []);
 
-  
   const handleImageUpload = () => {
     if (!form.values.imageUrl) {
+      setErrorImg(true);
+      setStep(2);
+    } else {
       widgetRef.current?.open();
     }
   };
 
+
   const handleSubmit = () => {
-    const { hasErrors } = form.validate();
-    if (!hasErrors) {
-      addProperty(form.values).unwrap().then((result) => {
-        toast.success(result.message)
-        navigate("/")
-      }).catch((error) => {
-        toast.error(error.data.message)
+    editProperty({ propertyData: form.values, id })
+      .unwrap()
+      .then((result) => {
+        toast.success(result.message);
+        navigate("/");
       })
-    }
+      .catch((error) => {
+        toast.error(error.data.message);
+      });
   };
 
   return (
@@ -197,11 +216,16 @@ function AddPropertyContent() {
               Upload Image
             </h2>
 
-            <div className="w-full h-full flex items-center justify-center flex-col mt-4 gap-6">
+            <div className="w-full h-full flex itmes-center justify-center flex-col mt-4 gap-6">
               {!form.values.imageUrl ? (
                 <div
-                  className={`w-full h-[260px] border-2 border-dashed ${errorImg ? "border-red-500 text-red-500" : "border-primaryColor text-primaryColor"} flex flex-col items-center justify-center cursor-pointer`}
+                  className={`w-full h-[260px] border-2 border-dashed ${
+                    errorImg
+                      ? "border-red-500 text-red-500"
+                      : "border-primaryColor text-primaryColor"
+                  } flex flex-col items-center justify-center cursor-pointer`}
                   onClick={handleImageUpload}
+
                 >
                   <AiOutlineCloudUpload size={50} />
                   <span>Upload Image</span>
@@ -210,6 +234,7 @@ function AddPropertyContent() {
                 <div
                   className="w-full h-[cover] max-h-[24rem]  rounded-lg overflow-hidden cursor-pointer"
                   onClick={handleImageUpload}
+
                 >
                   <img
                     src={form.values.imageUrl}
@@ -252,7 +277,7 @@ function AddPropertyContent() {
               withAsterisk
               label="Type"
               placeholder="Select Type"
-              data={["Select Type","For Rent", "For Sell"]}
+              data={["Select Type", "For Rent", "For Sell"]}
               {...form.getInputProps("type")}
             />
             <div className="w-full flex gap-2">
@@ -294,7 +319,7 @@ function AddPropertyContent() {
               type="submit"
               className="mt-3 bg-primaryColor bg-opacity-90 hover:bg-opacity-100 px-6 py-2 text-sm flex items-center justify-center rounded text-white duration-100 "
             >
-              Add Property
+              Update Property
             </button>
           ) : (
             <button

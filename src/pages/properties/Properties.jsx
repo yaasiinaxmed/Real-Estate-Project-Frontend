@@ -28,7 +28,7 @@ function Properties() {
       {/* Properties */}
       <div className="container pb-12 flex items-center justify-center flex-wrap gap-6 mt-8">
         {isLoading ? (
-          <div className="flex gap-2 items-center justify-center ">
+          <div className="py-[14rem] flex gap-2 items-center justify-center ">
             <span className="w-6 h-6 rounded-full border-2 border-primaryColor border-l-white animate-spin"></span>
             Loading...
           </div>

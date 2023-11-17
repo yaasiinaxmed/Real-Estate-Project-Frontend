@@ -21,9 +21,9 @@ function PropertyCard({ property }) {
         <h2 className="text-xl flex items-center gap-2 text-HeadingColor">
           <ImLocation2 />{" "}
           <span className="text-lg font-medium">
-            {property.address.slice(0, 8) +
+            {property.address +
               " , " +
-              property.city.slice(0, 8) +
+              property.city +
               " - " +
               property.country}{" "}
           </span>
