@@ -4,9 +4,10 @@ import logo from "../../assets/logo.png";
 import { FiMenu } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { FiChevronDown } from "react-icons/fi";
-import { BsHouse, BsHouseAdd } from "react-icons/bs";
+import { BsHouses, BsHouseAdd } from "react-icons/bs";
 import { IoLogOutOutline } from "react-icons/io5";
-import { FaUser, FaUserEdit } from "react-icons/fa";
+import { MdOutlineSendTimeExtension } from "react-icons/md";
+import { LiaUserEditSolid, LiaUserAltSolid } from "react-icons/lia";
 import { IoTrash } from "react-icons/io5";
 import { useGetUserQuery } from "../../store/api/UserSlice";
 import { Text, Avatar, Group, Menu } from "@mantine/core";
@@ -111,21 +112,26 @@ function Header() {
                         </Menu.Item>
                         </Link>
                         <Link to="/your-properties" onClick={() => setMenu(!menu)}>
-                        <Menu.Item leftSection={<BsHouse />}>
+                        <Menu.Item leftSection={<BsHouses />}>
                           Your Properties
                         </Menu.Item>
                         </Link>
                       </>
                     )}
+                      <Link to="/your-requests" onClick={() => setMenu(!menu)}>
+                        <Menu.Item leftSection={<MdOutlineSendTimeExtension />}>
+                          Your Requests
+                        </Menu.Item>
+                        </Link>
                     <Menu.Label>Settings</Menu.Label>
                     <Link
                       to={user && user.name ? `/profile/${user.name.toLowerCase().split(" ").join("-")}` : "/profile"}
                       onClick={() => setMenu(!menu)}
                     >
-                      <Menu.Item leftSection={<FaUser />}>Profile</Menu.Item>
+                      <Menu.Item leftSection={<LiaUserAltSolid />}>Profile</Menu.Item>
                     </Link>
                     <Link to="/profile/edit" onClick={() => setMenu(!menu)}>
-                      <Menu.Item leftSection={<FaUserEdit />}>
+                      <Menu.Item leftSection={<LiaUserEditSolid />}>
                         Edit Profile
                       </Menu.Item>
                     </Link>

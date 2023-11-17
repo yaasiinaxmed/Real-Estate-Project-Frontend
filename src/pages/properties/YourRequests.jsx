@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import PropertyCard from "../../components/PropertyCard";
-import { useGetPropertiesQuery } from "../../store/api/PropertySlice";
+import { useGetRequestsQuery } from "../../store/api/PropertySlice";
 import searchImg from "../../assets/search.png";
 import heroImg from "../../assets/hero.jpg";
-import { useGetUserQuery } from "../../store/api/UserSlice";
+import RequestsCard from "../../components/RequestsCard";
 
-function YourProperties() {
+function YourRequests() {
 
-  const { data: user = [] } = useGetUserQuery();
-  const { data: Allproperties = [], isLoading } = useGetPropertiesQuery();
-
-  const YourProperties = Allproperties.filter((pro) => pro.owner._id === user._id)
+  const { data: requests = [], isLoading } = useGetRequestsQuery();
 
   return (
     <div className="w-full">
@@ -19,7 +15,7 @@ function YourProperties() {
         className="w-full h-[200px] bg-cover bg-center bg-no-repeat flex items-center justify-center"
         style={{ backgroundImage: `linear-gradient(to bottom , #1E88E5, rgba(0,0,0,0.1)), url(${heroImg})` }}
       >
-      <h2 className="my-3 font-medium text-2xl md:text-3xl text-white">Your Properties</h2>
+      <h2 className="my-3 font-medium text-2xl md:text-3xl text-white">Your Requests</h2>
       </div>
       {/* Properties */}
       <div className="container pb-12 flex items-center justify-center flex-wrap gap-6 mt-8">
@@ -30,7 +26,7 @@ function YourProperties() {
           </div>
         ) : (
           <>
-            {YourProperties.length === 0 ? (
+            {requests.length === 0 ? (
               <section className="py-[3rem] flex flex-col items-center justify-center">
                 <figure className="w-[20rem]">
                   <img src={searchImg} alt="" className="w-full" />
@@ -38,8 +34,8 @@ function YourProperties() {
                 <h1>No Results Found</h1>
               </section>
             ) : (
-              YourProperties.map((property) => (
-                <PropertyCard property={property} key={property._id} />
+              requests.map((request) => (
+                <RequestsCard request={request} key={request._id} />
               ))
             )}
           </>
@@ -49,4 +45,4 @@ function YourProperties() {
   )
 }
 
-export default YourProperties
+export default YourRequests

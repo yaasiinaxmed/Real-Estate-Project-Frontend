@@ -21,6 +21,7 @@ import Profile from "./pages/Profile/Profile";
 import EditProfile from "./pages/Profile/EditProfile";
 import YourProperties from "./pages/properties/YourProperties";
 import EditProperty from "./pages/properties/EditProperty";
+import YourRequests from "./pages/properties/YourRequests";
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
         {/* Private Routes */}
         <Route element={<PrivateRoute/>}>
           <Route path="/your-properties" element={<YourProperties/>} />
+          <Route path="/your-requests" element={<YourRequests/>} />
           <Route path="/add-property" element={<AddProperty/>} />
           <Route path="/edit-property/:id/:property" element={<EditProperty/>} />
           <Route path="/profile/:name" element={<Profile/>} />
