@@ -49,6 +49,12 @@ function LoginContent() {
     }
   };
 
+  useEffect(() => {
+    if(userInfo === true) {
+      navigate("/")
+    }
+  }, [userInfo])
+
   return (
     <div className="w-full md:w-2/4 xl:w-1/3 p-6 sm:p-8 rounded-lg flex flex-col shadow-[0px_0px_6px_rgb(0,0,0,0.1)]">
       <h2 className="text-3xl font-medium text-center">Login</h2>

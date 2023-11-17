@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "@mantine/form";
 import { TextInput, NativeSelect, PasswordInput, Text } from "@mantine/core";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignUpMutation } from "../../store/api/AuthSlice";
 import toast from "react-hot-toast";
+import { useUserInfo } from "../../context/UserInfo";
 
 function SignUpContent() {
-
+  const {userInfo } = useUserInfo();
   const [signUp] = useSignUpMutation()
   const navigate = useNavigate()
 
@@ -38,6 +39,12 @@ function SignUpContent() {
         })
     }
   }
+
+  useEffect(() => {
+    if(userInfo === true) {
+      navigate("/")
+    }
+  }, [userInfo])
 
   return (
     <div className="w-full md:w-2/4 xl:w-1/3 p-6 sm:p-8 rounded-lg flex flex-col shadow-[0px_0px_6px_rgb(0,0,0,0.1)]">

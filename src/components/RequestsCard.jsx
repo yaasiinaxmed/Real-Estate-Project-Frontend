@@ -48,7 +48,7 @@ function RequestsCard({ request }) {
               / mo
             </Text>) : ""}
           </h2>
-          <Link to={`/property/${request.property._id}/${request.property.title.toLowerCase().split(" ").join("-")}`}>
+          <Link to={`/your-requests/${request._id}/${request.property.title.toLowerCase().split(" ").join("-")}`}>
             <button className="bg-white text-primaryColor px-4 py-3 text-sm font-medium">
               See More
             </button>

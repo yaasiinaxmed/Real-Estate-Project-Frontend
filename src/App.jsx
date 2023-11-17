@@ -22,6 +22,7 @@ import EditProfile from "./pages/Profile/EditProfile";
 import YourProperties from "./pages/properties/YourProperties";
 import EditProperty from "./pages/properties/EditProperty";
 import YourRequests from "./pages/properties/YourRequests";
+import RequestDetails from "./pages/properties/RequestDetails";
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
           <Route path="/edit-property/:id/:property" element={<EditProperty/>} />
           <Route path="/profile/:name" element={<Profile/>} />
           <Route path="/profile/Edit" element={<EditProfile/>} />
+          <Route path="/your-requests/:id/:request" element={<RequestDetails/>} />
         </Route>
       </Routes>
 

@@ -27,9 +27,16 @@ function AddPropertyContent() {
   const [errorImg, setErrorImg] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
-  const property = properties.find((pro) => (pro && pro._id === id) || {});
 
   const { getCountries } = useCountries();
+  const [property, setProperty] = useState({});
+
+  useEffect(() => {
+    // Find the property when the properties or id change
+    const foundProperty = properties.find((pro) => pro && pro._id === id) || {};
+    setProperty(foundProperty);
+    form.setValues(getInitialFormValues(foundProperty));
+  }, [properties, id, step]);
 
   const getInitialFormValues = () => ({
     country: property ? property.country : "",
@@ -46,9 +53,10 @@ function AddPropertyContent() {
   });
 
   useEffect(() => {
-    form.setValues(getInitialFormValues())
-  }, [property, id]);
-
+    if (step === 1) {
+      form.setValues(getInitialFormValues());
+    }
+  }, [property, id, step]);
 
   const form = useForm({
     initialValues: getInitialFormValues(),
@@ -99,18 +107,18 @@ function AddPropertyContent() {
   });
 
   const handleNextStep = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     const { hasErrors } = form.validate();
 
     if (step === 2) {
       if (!form.values.imageUrl) {
         setErrorImg(true);
-        setStep(2)
-        return; 
+        setStep(2);
+        return;
       }
     }
-  
+
     if (!hasErrors) {
       setStep((current) => current + 1);
     }
@@ -137,6 +145,7 @@ function AddPropertyContent() {
             console.error(err);
           } else if (result.event === "success") {
             form.setFieldValue("imageUrl", result.info.secure_url);
+            setErrorImg(false);
           }
         }
       );
@@ -155,7 +164,6 @@ function AddPropertyContent() {
       widgetRef.current?.open();
     }
   };
-
 
   const handleSubmit = () => {
     editProperty({ propertyData: form.values, id })
@@ -225,7 +233,6 @@ function AddPropertyContent() {
                       : "border-primaryColor text-primaryColor"
                   } flex flex-col items-center justify-center cursor-pointer`}
                   onClick={handleImageUpload}
-
                 >
                   <AiOutlineCloudUpload size={50} />
                   <span>Upload Image</span>
@@ -234,7 +241,6 @@ function AddPropertyContent() {
                 <div
                   className="w-full h-[cover] max-h-[24rem]  rounded-lg overflow-hidden cursor-pointer"
                   onClick={handleImageUpload}
-
                 >
                   <img
                     src={form.values.imageUrl}

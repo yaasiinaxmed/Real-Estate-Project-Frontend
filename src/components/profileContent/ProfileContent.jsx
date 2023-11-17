@@ -14,7 +14,7 @@ function ProfileContent() {
         {user.name}
       </Text>
       <Text ta="center" c="dimmed" fz="sm">
-        {user.email} • {user.role}
+        {user.email} • {user.role === "owner" ? "Owner" : "Renter"}
       </Text>
       <button onClick={handleDeleteUser} className="mt-6 w-full bg-red-500 bg-opacity-90 hover:bg-opacity-100 px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 ">
         Delete Account
