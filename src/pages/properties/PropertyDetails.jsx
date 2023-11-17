@@ -6,7 +6,7 @@ import { HiHome } from "react-icons/hi2";
 import { FaBath } from "react-icons/fa";
 import { IoBed } from "react-icons/io5";
 import Map from "../../components/propertyContent/Map";
-import { useDeletePropertyMutation, useGetPropertiesQuery } from "../../store/api/PropertySlice";
+import { useDeletePropertyMutation, useGetPropertiesQuery, useSendRequestMutation } from "../../store/api/PropertySlice";
 import { useGetUserQuery } from "../../store/api/UserSlice";
 import toast from "react-hot-toast";
 
@@ -14,12 +14,14 @@ function PropertyDetails() {
   const {data: properties = [], error, isLoading} = useGetPropertiesQuery()
   const { data: user = [] } = useGetUserQuery();
   const [deleteProperty] = useDeletePropertyMutation()
+  const [ sendRequest ] = useSendRequestMutation()
 
   const { id } = useParams();
   const navigate = useNavigate()
 
   const property = properties.find((pro) => pro && pro._id === id);
 
+  // Delete Property
   const handleDelete = (id) => {
     if(confirm("Do you went to delete this property?")) {
       deleteProperty(id).unwrap().then((result) => {
@@ -29,6 +31,16 @@ function PropertyDetails() {
         toast.error(error.data.message)
       })
     }
+  }
+
+  // Send Request
+  const HandleSendRequest = (id) => {
+    sendRequest(id).unwrap().then((result) => {
+      toast.success(result.message)
+      navigate("/")
+    }).catch((error) => {
+      toast.error(error.data.message)
+    })
   }
 
   return (
@@ -146,7 +158,7 @@ function PropertyDetails() {
                 <button className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
                   Contact Owner
                 </button>
-                <button className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
+                <button onClick={() => HandleSendRequest(property._id)} className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
                   Send Request
                 </button>
               </div>
