@@ -12,7 +12,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { useAddPropertyMutation } from "../../store/api/PropertySlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import useCountries from "../../Hooks/useCountries";
+import useCountries from "../../hooks/useCountries";
 
 function AddPropertyContent() {
 

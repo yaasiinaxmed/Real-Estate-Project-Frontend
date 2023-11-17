@@ -53,7 +53,7 @@ function PropertyDetails() {
         <img
           src={property.imageUrl}
           alt=""
-          className="w-full !h-full !bg-cover !bg-center !bg-no-repeat !object-center"
+          className="w-full h-full !bg-cover !bg-center !bg-no-repeat !object-center"
         />
       </figure>
       {/* Details */}
