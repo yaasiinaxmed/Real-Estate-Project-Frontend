@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useGetRequestsQuery } from "../../store/api/PropertySlice";
-import searchImg from "../../assets/search.png";
+import emptyImg from "../../assets/empty.png";
 import heroImg from "../../assets/hero.jpg";
 import RequestsCard from "../../components/RequestsCard";
 
@@ -30,10 +30,10 @@ function YourRequests() {
           <>
             {currentRequests.length === 0 ? (
               <section className="py-[3rem] flex flex-col items-center justify-center">
-                <figure className="w-[20rem]">
-                  <img src={searchImg} alt="" className="w-full" />
+                <figure className="w-[12rem]">
+                  <img src={emptyImg} alt="" className="w-full" />
                 </figure>
-                <h1>No Results Found</h1>
+                <h1 className="mt-3 text-gray-500">Your Requests Is Empty</h1>
               </section>
             ) : (
               currentRequests.map((request) => (

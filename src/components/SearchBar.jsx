@@ -8,7 +8,7 @@ function SearchBar({filter, setFilter}) {
         type="text"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
-        placeholder="Search by country, city , address and propertyType"
+        placeholder="Search by title, country, city , address and propertyType"
         className="w-full px-5 p-4 outline-none"
       />
       <button className="text-primaryColor p-3 px-5">
