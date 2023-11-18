@@ -11,8 +11,8 @@ import { LiaUserEditSolid, LiaUserAltSolid } from "react-icons/lia";
 import { IoTrash } from "react-icons/io5";
 import { useGetUserQuery } from "../../store/api/UserSlice";
 import { Text, Avatar, Group, Menu } from "@mantine/core";
-import Cookies from "js-cookie";
 import { useUserInfo } from "../../context/UserInfo";
+import { RiHistoryFill } from "react-icons/ri";
 
 function Header() {
   const { userInfo, handleLogout, handleDeleteUser } = useUserInfo();
@@ -118,6 +118,11 @@ function Header() {
                         </Link>
                       </>
                     )}
+                    <Link to="/transaction" onClick={() => setMenu(!menu)}>
+                        <Menu.Item leftSection={<RiHistoryFill />}>
+                        Transaction history
+                        </Menu.Item>
+                        </Link>
                       <Link to="/your-requests" onClick={() => setMenu(!menu)}>
                         <Menu.Item leftSection={<MdOutlineSendTimeExtension />}>
                           Your Requests
