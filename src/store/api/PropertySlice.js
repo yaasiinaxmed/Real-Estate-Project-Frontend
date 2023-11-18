@@ -86,7 +86,26 @@ export const propertySlice = createApi({
       query: () => "properties/transactions",
       providesTags: ["property"],
     }),
+
+    // Contact Owner
+    ContactOwner: builder.mutation({
+      query: (newMessage) => ({
+        url: "/properties/contactOwner",
+        method: "POST",
+        body: newMessage,
+      }),
+    }),
   }),
 });
 
-export const { useGetPropertiesQuery, useAddPropertyMutation, useEditPropertyMutation, useDeletePropertyMutation, useSendRequestMutation, useGetRequestsQuery, useApproveMutation, useGetTransactionsQuery } = propertySlice;
+export const {
+  useGetPropertiesQuery,
+  useAddPropertyMutation,
+  useEditPropertyMutation,
+  useDeletePropertyMutation,
+  useSendRequestMutation,
+  useGetRequestsQuery,
+  useApproveMutation,
+  useGetTransactionsQuery,
+  useContactOwnerMutation,
+} = propertySlice;

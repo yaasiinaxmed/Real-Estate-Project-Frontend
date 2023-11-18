@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Avatar, Badge, Group, NumberFormatter, Text } from "@mantine/core";
 import { ImLocation2 } from "react-icons/im";
 import { HiHome } from "react-icons/hi2";
@@ -158,9 +158,11 @@ function RequestDetails() {
                         </Group>
                         {/* buttons */}
                         <div className="flex flex-col gap-3 md:flex-row mt-3 md:mt-0">
-                          <button className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
-                            Contact Owner
-                          </button>
+                          <Link to={`/property/${request?.property?._id}/contact`}>
+                            <button className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
+                              Contact Owner
+                            </button>
+                          </Link>
                           <button className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100">
                             Pending approval
                           </button>

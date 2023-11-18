@@ -47,7 +47,7 @@ function PropertyDetails() {
   }
 
   return (
-    <section>
+    <section className="relative">
       <div className="container">
         {isLoading ? (
           <div className="py-[14rem] flex gap-2 items-center justify-center ">
@@ -158,9 +158,11 @@ function PropertyDetails() {
               {/* buttons */}
               {property.owner._id !== user._id ? (
                 <div className="flex flex-col gap-3 md:flex-row mt-3 md:mt-0">
+                <Link to={`/property/${property._id}/contact`}>
                 <button className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
                   Contact Owner
                 </button>
+                </Link>
                 <button onClick={() => HandleSendRequest(property._id)} className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
                 Send Request
                 </button>

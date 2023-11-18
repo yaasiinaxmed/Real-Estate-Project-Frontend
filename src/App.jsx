@@ -23,9 +23,9 @@ import YourProperties from "./pages/properties/YourProperties";
 import EditProperty from "./pages/properties/EditProperty";
 import YourRequests from "./pages/properties/YourRequests";
 import RequestDetails from "./pages/properties/RequestDetails";
+import ContactOwner from "./pages/properties/ContactOwner";
 
 function App() {
-
   return (
     <div className="w-full">
       {/* Header  */}
@@ -37,17 +37,24 @@ function App() {
         <Route path="/properties" element={<Properties />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/property/:id/:property" element={<PropertyDetails/>} />
+        <Route path="/property/:id/:property" element={<PropertyDetails />} />
+        <Route path="/property/:id/contact" element={<ContactOwner/>} />
 
         {/* Private Routes */}
-        <Route element={<PrivateRoute/>}>
-          <Route path="/your-properties" element={<YourProperties/>} />
-          <Route path="/your-requests" element={<YourRequests/>} />
-          <Route path="/add-property" element={<AddProperty/>} />
-          <Route path="/edit-property/:id/:property" element={<EditProperty/>} />
-          <Route path="/profile/:name" element={<Profile/>} />
-          <Route path="/profile/Edit" element={<EditProfile/>} />
-          <Route path="/your-requests/:id/:request" element={<RequestDetails/>} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/your-properties" element={<YourProperties />} />
+          <Route path="/your-requests" element={<YourRequests />} />
+          <Route path="/add-property" element={<AddProperty />} />
+          <Route
+            path="/edit-property/:id/:property"
+            element={<EditProperty />}
+          />
+          <Route path="/profile/:name" element={<Profile />} />
+          <Route path="/profile/Edit" element={<EditProfile />} />
+          <Route
+            path="/your-requests/:id/:request"
+            element={<RequestDetails />}
+          />
         </Route>
       </Routes>
 
@@ -55,7 +62,7 @@ function App() {
       <Toaster position="top-right" reverseOrder={false} />
 
       {/* footer */}
-      <Footer/>
+      <Footer />
     </div>
   );
 }
