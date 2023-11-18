@@ -12,6 +12,7 @@ import {
 } from "../../store/api/PropertySlice";
 import { useGetUserQuery } from "../../store/api/UserSlice";
 import toast from "react-hot-toast";
+import { formatDistanceToNow } from "date-fns";
 
 function RequestDetails() {
   const { data: requests = [], error, isLoading } = useGetRequestsQuery();
@@ -89,7 +90,13 @@ function RequestDetails() {
                 <p className="my-2 whitespace-pre-wrap text-lg text-gray-600 ">
                   {request?.property?.description}
                 </p>
-                {/* request?.property? info */}
+                <Badge className="my-1">
+                  {formatDistanceToNow(new Date(request?.createdAt), {
+                    addSuffix: true,
+                  }).split("about")}
+                </Badge>
+
+                {/* property info */}
                 <div className="flex flex-col gap-3">
                   <Text size="xl" className="font-medium">
                     Property Info
@@ -158,14 +165,14 @@ function RequestDetails() {
                         </Group>
                         {/* buttons */}
                         <div className="flex flex-col gap-3 md:flex-row mt-3 md:mt-0">
-                          <Link 
-                          to={`/property/${request?.property?._id}/contact`}
-                          className="w-full flex md:w-auto"
-                        >
-                          <button className="!w-full bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
-                          Contact Owner
-                          </button>
-                        </Link>
+                          <Link
+                            to={`/property/${request?.property?._id}/contact`}
+                            className="w-full flex md:w-auto"
+                          >
+                            <button className="!w-full bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
+                              Contact Owner
+                            </button>
+                          </Link>
                           <button className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100">
                             Pending approval
                           </button>

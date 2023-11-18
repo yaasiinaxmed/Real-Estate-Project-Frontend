@@ -9,6 +9,7 @@ import Map from "../../components/propertyContent/Map";
 import { useDeletePropertyMutation, useGetPropertiesQuery, useSendRequestMutation } from "../../store/api/PropertySlice";
 import { useGetUserQuery } from "../../store/api/UserSlice";
 import toast from "react-hot-toast";
+import { formatDistanceToNow } from 'date-fns'
 
 function PropertyDetails() {
   const {data: properties = [], error, isLoading} = useGetPropertiesQuery()
@@ -99,6 +100,7 @@ function PropertyDetails() {
           <p className="my-2 whitespace-pre-wrap text-lg text-gray-600 ">
             {property.description}
           </p>
+          <Badge className="my-1">{formatDistanceToNow(new Date(property?.createdAt), {addSuffix: true}).split("about")}</Badge>
           {/* property info */}
           <div className="flex flex-col gap-3">
           <Text size="xl" className="font-medium">
