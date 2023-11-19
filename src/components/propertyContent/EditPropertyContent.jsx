@@ -17,11 +17,11 @@ import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import useCountries from "../../hooks/useCountries";
 
+const propertyTypes = ["Select Property Type", "House", "Villa", "Apartment"];
+
 function AddPropertyContent() {
   const { data: properties = [], isLoading } = useGetPropertiesQuery();
   const [editProperty] = useEditPropertyMutation();
-
-  const data = ["Select Property Type", "House", "Villa", "Apartment"];
 
   const [step, setStep] = useState(1);
   const [errorImg, setErrorImg] = useState(false);
@@ -30,13 +30,6 @@ function AddPropertyContent() {
 
   const { getCountries } = useCountries();
   const [property, setProperty] = useState({});
-
-  useEffect(() => {
-    // Find the property when the properties or id change
-    const foundProperty = properties.find((pro) => pro && pro._id === id) || {};
-    setProperty(foundProperty);
-    form.setValues(getInitialFormValues(foundProperty));
-  }, [properties, id, step]);
 
   const getInitialFormValues = () => ({
     country: property ? property.country : "",
@@ -53,10 +46,16 @@ function AddPropertyContent() {
   });
 
   useEffect(() => {
-    if (step === 1) {
-      form.setValues(getInitialFormValues());
+    // Find the property when the properties or id change
+    const foundProperty = properties.find((pro) => pro && pro._id === id) || {};
+    setProperty(foundProperty);
+  }, [properties, id, step]);
+
+  useEffect(() => {
+    if (property) {
+      form.setValues(getInitialFormValues(property));
     }
-  }, [property, id, step]);
+  }, [property]);
 
   const form = useForm({
     initialValues: getInitialFormValues(),
@@ -108,17 +107,16 @@ function AddPropertyContent() {
 
   const handleNextStep = (e) => {
     e.preventDefault();
-
+  
     const { hasErrors } = form.validate();
-
+  
     if (step === 2) {
       if (!form.values.imageUrl) {
         setErrorImg(true);
-        setStep(2);
         return;
       }
     }
-
+  
     if (!hasErrors) {
       setStep((current) => current + 1);
     }
@@ -276,7 +274,7 @@ function AddPropertyContent() {
               placeholder="Property Type"
               clearable
               searchable
-              data={data}
+              data={propertyTypes}
               {...form.getInputProps("propertyType")}
             />
             <NativeSelect

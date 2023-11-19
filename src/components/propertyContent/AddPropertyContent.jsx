@@ -14,10 +14,9 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useCountries from "../../hooks/useCountries";
 
+const propertyTypes = ["Select Property Type", "House", "Villa", "Apartment"];
+
 function AddPropertyContent() {
-
-  const data = ["Select Property Type", "House", "Villa", "Apartment"];
-
   const [step, setStep] = useState(1);
   const [errorImg, setErrorImg] = useState(false)
   const navigate = useNavigate()
@@ -245,7 +244,7 @@ function AddPropertyContent() {
               placeholder="Property Type"
               clearable
               searchable
-              data={data}
+              data={propertyTypes}
               {...form.getInputProps("propertyType")}
             />
             <NativeSelect
