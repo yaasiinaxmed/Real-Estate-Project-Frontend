@@ -51,7 +51,7 @@ function RequestDetails() {
             <figure className="w-full cover-img h-[cover] max-h-[700px]  relative overflow-hidden !rounded-2xl ">
               {/* Badge Availabe status */}
               <div className="absolute top-2 left-3">
-                <Badge color={request?.property?.available ? "lime" : "red"}>
+                <Badge color={request?.property?.available ? "lime" : "red"} className='!capitalize !font-medium'>
                   {request?.property?.available ? "Available" : "Unavailable"}
                 </Badge>
               </div>
@@ -90,7 +90,7 @@ function RequestDetails() {
                 <p className="my-2 whitespace-pre-wrap text-lg text-gray-600 ">
                   {request?.property?.description}
                 </p>
-                <Badge className="my-1">
+                <Badge className="my-1 !capitalize !font-medium" >
                   {formatDistanceToNow(new Date(request?.createdAt), {
                     addSuffix: true,
                   }).split("about")}

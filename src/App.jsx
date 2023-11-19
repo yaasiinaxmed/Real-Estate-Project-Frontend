@@ -24,6 +24,7 @@ import EditProperty from "./pages/properties/EditProperty";
 import YourRequests from "./pages/properties/YourRequests";
 import RequestDetails from "./pages/properties/RequestDetails";
 import ContactOwner from "./pages/properties/ContactOwner";
+import TransactionHistory from "./pages/properties/TransactionHistory";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="/your-properties" element={<YourProperties />} />
           <Route path="/your-requests" element={<YourRequests />} />
           <Route path="/add-property" element={<AddProperty />} />
+          <Route path="/transaction-history" element={<TransactionHistory/>} />
           <Route
             path="/edit-property/:id/:property"
             element={<EditProperty />}

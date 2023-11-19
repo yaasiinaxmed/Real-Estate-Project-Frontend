@@ -8,7 +8,9 @@ function YourRequests() {
 
   const { data: requests = [], isLoading } = useGetRequestsQuery();
 
-  const currentRequests = requests.filter((request) => request?.isApproved !== true)
+  const allRequests = requests.filter((request) => request?.isApproved !== true)
+
+  const currentRequests = allRequests.filter((request) => request?.property !== null)
 
   return (
     <div className="w-full">
@@ -19,7 +21,7 @@ function YourRequests() {
       >
       <h2 className="my-3 font-medium text-2xl md:text-3xl text-white">Your Requests</h2>
       </div>
-      {/* Properties */}
+      {/* requests */}
       <div className="container pb-12 flex items-center justify-center flex-wrap gap-6 mt-8">
         {isLoading ? (
           <div className="py-[14rem] flex gap-2 items-center justify-center ">

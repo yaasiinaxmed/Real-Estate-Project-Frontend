@@ -12,7 +12,7 @@ function PropertyCard({ property }) {
       <figure className="relative w-full h-[200px]">
         {/* Badge */}
         {property.type.toLowerCase() === "for sell" && (
-          <div className="absolute top-2 right-3"><Badge>For Sell</Badge></div>
+          <div className="absolute top-2 right-3"><Badge className='!capitalize !font-medium'>For Sell</Badge></div>
         )}
         <img src={property.imageUrl} alt="" className="w-full h-full" />
       </figure>

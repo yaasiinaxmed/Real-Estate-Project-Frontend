@@ -118,7 +118,7 @@ function Header() {
                         </Link>
                       </>
                     )}
-                    <Link to="/transaction" onClick={() => setMenu(!menu)}>
+                    <Link to="/transaction-history" onClick={() => setMenu(!menu)}>
                         <Menu.Item leftSection={<RiHistoryFill />}>
                         Transaction history
                         </Menu.Item>

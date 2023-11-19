@@ -11,44 +11,44 @@ function RequestsCard({ request }) {
       {/* image */}
       <figure className="relative w-full h-[200px]">
         {/* Badge */}
-        {request.property.type.toLowerCase() === "for sell" && (
-          <div className="absolute top-2 right-3"><Badge>For Sell</Badge></div>
+        {request?.property?.type.toLowerCase() === "for sell" && (
+          <div className="absolute top-2 right-3"><Badge className='!capitalize !font-medium'>For Sell</Badge></div>
         )}
-        <img src={request.property.imageUrl} alt="" className="w-full h-full" />
+        <img src={request?.property?.imageUrl} alt="" className="w-full h-full" />
       </figure>
       {/* Details */}
       <div className="mt-1 flex flex-col gap-3 p-4">
         <h2 className="text-xl flex items-center gap-2 text-HeadingColor">
           <ImLocation2 />{" "}
           <span className="text-lg font-medium">
-            {request.property.address +
+            {request?.property?.address +
               " , " +
-              request.property.city +
+              request?.property?.city +
               " - " +
-              request.property.country}{" "}
+              request?.property?.country}{" "}
           </span>
         </h2>
         <div className="flex items-center justify-between text-HeadingColor">
           <span className="flex items-center text-lg gap-2">
-            <IoBed /> <p className="text-sm">{request.property.bedrooms} Bed Rooms</p>
+            <IoBed /> <p className="text-sm">{request?.property?.bedrooms} Bed Rooms</p>
           </span>
           <span className="flex items-center text-lg gap-2">
-            <FaBath /> <p className="text-sm">{request.property.bathrooms} Bath Rooms</p>
+            <FaBath /> <p className="text-sm">{request?.property?.bathrooms} Bath Rooms</p>
           </span>
         </div>
         <div className="mt-3 flex items-center justify-between">
         <h2 className="text-lg font-medium text-HeadingColor">
             <NumberFormatter
               prefix="$ "
-              value={request.property.price}
+              value={request?.property?.price}
               thousandSeparator
             />
 
-            {request.property.type.toLowerCase() === "for rent" ? (<Text span fz="sm" c="dimmed">
+            {request?.property?.type.toLowerCase() === "for rent" ? (<Text span fz="sm" c="dimmed">
               / mo
             </Text>) : ""}
           </h2>
-          <Link to={`/your-requests/${request._id}/${request.property.title.toLowerCase().split(" ").join("-")}`}>
+          <Link to={`/your-requests/${request?._id}/${request?.property?.title.toLowerCase().split(" ").join("-")}`}>
             <button className="bg-white text-primaryColor px-4 py-3 text-sm font-medium">
               See More
             </button>
