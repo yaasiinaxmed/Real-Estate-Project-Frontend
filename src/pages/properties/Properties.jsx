@@ -7,6 +7,7 @@ import emptyImg from "../../assets/empty.png";
 import heroImg from "../../assets/hero.jpg";
 
 function Properties() {
+  console.log("test")
   const { data: properties = [], isLoading } = useGetPropertiesQuery();
   const [filter, setFilter] = useState("");
   const searchData = properties.filter(
