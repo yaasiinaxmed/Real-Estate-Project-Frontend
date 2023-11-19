@@ -3,11 +3,10 @@ import PropertyCard from "../../components/PropertyCard";
 import SearchBar from "../../components/SearchBar";
 import { useGetPropertiesQuery } from "../../store/api/PropertySlice";
 import searchImg from "../../assets/search.png";
-import emptyImg from "../../assets/empty.png";
+import emptyImg from "../../assets/Empty.png";
 import heroImg from "../../assets/hero.jpg";
 
 function Properties() {
-  console.log("test")
   const { data: properties = [], isLoading } = useGetPropertiesQuery();
   const [filter, setFilter] = useState("");
   const searchData = properties.filter(

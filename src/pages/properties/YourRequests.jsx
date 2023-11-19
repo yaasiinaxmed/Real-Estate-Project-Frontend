@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useGetRequestsQuery } from "../../store/api/PropertySlice";
-import emptyImg from "../../assets/empty.png";
+import emptyImg from "../../assets/Empty.png";
 import heroImg from "../../assets/hero.jpg";
 import RequestsCard from "../../components/RequestsCard";
 

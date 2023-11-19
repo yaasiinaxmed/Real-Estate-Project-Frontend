@@ -1,7 +1,7 @@
 import React from "react";
 import PropertyCard from "../../components/PropertyCard";
 import { useGetPropertiesQuery } from "../../store/api/PropertySlice";
-import emptyImg from "../../assets/empty.png";
+import emptyImg from "../../assets/Empty.png";
 import heroImg from "../../assets/hero.jpg";
 import { useGetUserQuery } from "../../store/api/UserSlice";
 

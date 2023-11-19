@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetTransactionsQuery } from "../../store/api/PropertySlice";
-import emptyImg from "../../assets/empty.png";
+import emptyImg from "../../assets/Empty.png";
 import heroImg from "../../assets/hero.jpg";
 import TransactionCard from "../../components/TransactionCard";
 
