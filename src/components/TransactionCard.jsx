@@ -44,7 +44,7 @@ function TransactionCard({ transaction, isLoading }) {
             {format(new Date(transaction?.createdAt), "yyyy/MM/dd")} -{" "}
             {formatDistanceToNow(new Date(transaction?.createdAt), {
               addSuffix: true,
-            })}
+            }).split("about")}
           </Text>
         </div>
         <div className="flex justify-between">
@@ -63,14 +63,25 @@ function TransactionCard({ transaction, isLoading }) {
         </div>
       </div>
       {/* buttons */}
+     {user.role === "renter" ? (
+       <Link
+       to={`/property/${transaction?.request?.property._id}/contact`}
+       className="w-full flex md:w-auto"
+     >
+       <button className="!w-full bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100">
+         Contact Owner
+       </button>
+     </Link>
+     ): (
       <Link
-        to={`/property/${transaction?.request?.property._id}/contact`}
-        className="w-full flex md:w-auto"
-      >
-        <button className="!w-full bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100">
-          Contact Owner
-        </button>
-      </Link>
+      to={`/property/${transaction?._id}/contact/renter`}
+      className="w-full flex md:w-auto"
+    >
+      <button className="!w-full bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100">
+        Contact Renter
+      </button>
+    </Link>
+     )}
     </div>
   );
 }

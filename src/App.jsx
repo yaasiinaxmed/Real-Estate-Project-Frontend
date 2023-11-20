@@ -25,6 +25,7 @@ import YourRequests from "./pages/properties/YourRequests";
 import RequestDetails from "./pages/properties/RequestDetails";
 import ContactOwner from "./pages/properties/ContactOwner";
 import TransactionHistory from "./pages/properties/TransactionHistory";
+import ContactRenter from "./pages/properties/ContactRenter";
 
 function App() {
   return (
@@ -39,7 +40,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/property/:id/:property" element={<PropertyDetails />} />
-        <Route path="/property/:id/contact" element={<ContactOwner/>} />
+        <Route path="/property/:id/contact/owner" element={<ContactOwner/>} />
+        <Route path="/property/:id/contact/renter" element={<ContactRenter/>} />
 
         {/* Private Routes */}
         <Route element={<PrivateRoute />}>

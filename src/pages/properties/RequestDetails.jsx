@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Avatar, Badge, Group, NumberFormatter, Text } from "@mantine/core";
 import { ImLocation2 } from "react-icons/im";
 import { HiHome } from "react-icons/hi2";
@@ -16,9 +16,10 @@ import { formatDistanceToNow } from "date-fns";
 
 function RequestDetails() {
   const { data: requests = [], error, isLoading } = useGetRequestsQuery();
-  const { data: user = [] } = useGetUserQuery();
+  const { data: user = {}} = useGetUserQuery();
 
   const { id } = useParams();
+  const navigate = useNavigate()
   const [value, setValue] = useState(false);
 
   const request = requests.find((request) => request && request._id === id);
@@ -30,6 +31,7 @@ function RequestDetails() {
       .unwrap()
       .then((result) => {
         toast.success(result.message);
+        navigate("/transaction-history")
         setValue(true);
       })
       .catch((error) => {
@@ -166,7 +168,7 @@ function RequestDetails() {
                         {/* buttons */}
                         <div className="flex flex-col gap-3 md:flex-row mt-3 md:mt-0">
                           <Link
-                            to={`/property/${request?.property?._id}/contact`}
+                            to={`/property/${request?.property?._id}/contact/owner`}
                             className="w-full flex md:w-auto"
                           >
                             <button className="!w-full bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
@@ -208,19 +210,6 @@ function RequestDetails() {
                       {/* buttons */}
 
                       <div className="flex flex-col gap-3 md:flex-row mt-3 md:mt-0">
-                        <Link
-                          to={`/edit-property/${
-                            request?.property?._id
-                          }/${request?.property?.title
-                            .toLowerCase()
-                            .split(" ")
-                            .join("-")}`}
-                          className="w-full flex md:w-auto"
-                        >
-                          <button className="!w-full bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
-                            Edit Property
-                          </button>
-                        </Link>
                         <button
                           onClick={() => HandleApprove(request._id)}
                           className="bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105"

@@ -160,7 +160,7 @@ function PropertyDetails() {
               {/* buttons */}
               {property.owner._id !== user._id ? (
                 <div className="flex flex-col gap-3 md:flex-row mt-3 md:mt-0">
-                <Link to={`/property/${property._id}/contact`} className="w-full flex md:w-auto">
+                <Link to={`/property/${property._id}/contact/owner`} className="w-full flex md:w-auto">
                 <button className="!w-full bg-primaryColor px-4 py-3 text-sm flex items-center justify-center rounded-xl text-white duration-100 hover:scale-105">
                   Contact Owner
                 </button>

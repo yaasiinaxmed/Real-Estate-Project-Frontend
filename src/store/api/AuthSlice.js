@@ -35,7 +35,6 @@ export const authSlice = createApi({
                try {
                  const result = await queryFulfilled
                  setToken(result.data.token)
-                 console.log("result login:", result)
                } catch (error) {
                  console.log("error login: ", error)
                }

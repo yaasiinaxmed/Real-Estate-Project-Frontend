@@ -95,6 +95,16 @@ export const propertySlice = createApi({
         body: newMessage,
       }),
     }),
+
+     // Contact Renter
+     ContactRenter: builder.mutation({
+      query: (newMessage) => ({
+        url: "/properties/contactRenter",
+        method: "POST",
+        body: newMessage,
+      }),
+
+    }),
   }),
 });
 
@@ -108,4 +118,5 @@ export const {
   useApproveMutation,
   useGetTransactionsQuery,
   useContactOwnerMutation,
+  useContactRenterMutation
 } = propertySlice;
