@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 
 function PropertyCard({ property }) {
   return (
-    <div className="card w-[340px] bg-white flex flex-col shadow-[0px_0px_12px_rgb(0,0,0,0.1)] rounded-lg overflow-hidden duration-100 hover:scale-105 ">
+    <Link to={`/property/${property._id}/${property.title.toLowerCase().split(" ").join("-")}`}
+     className="card w-[340px] bg-white flex flex-col shadow-[0px_0px_12px_rgb(0,0,0,0.1)] rounded-lg overflow-hidden duration-100 hover:scale-105 ">
       {/* image */}
       <figure className="relative w-full h-[200px]">
         {/* Badge */}
@@ -55,7 +56,7 @@ function PropertyCard({ property }) {
           </Link>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
