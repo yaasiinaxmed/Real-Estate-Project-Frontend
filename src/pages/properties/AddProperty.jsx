@@ -4,7 +4,7 @@ import { Text, Title } from "@mantine/core";
 
 function AddProperty() {
   return (
-    <section className="py-[5rem]">
+    <section className="py-[8rem]">
       <div className="container flex flex-col items-center justify-center">
         {/* Title */}
         <div className="my-4">

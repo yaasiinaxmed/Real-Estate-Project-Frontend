@@ -13,6 +13,7 @@ import { useAddPropertyMutation } from "../../store/api/PropertySlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useCountries from "../../hooks/useCountries";
+import { IoClose } from "react-icons/io5";
 
 const propertyTypes = ["Select Property Type", "House", "Villa", "Apartment"];
 
@@ -20,6 +21,7 @@ function AddPropertyContent() {
   const [step, setStep] = useState(1);
   const [errorImg, setErrorImg] = useState(false)
   const navigate = useNavigate()
+  const [images, setImages ] = useState([])
 
   const [addProperty] = useAddPropertyMutation()
 
@@ -30,7 +32,6 @@ function AddPropertyContent() {
       country: "",
       city: "",
       address: "",
-      imageUrl: "",
       title: "",
       type: "",
       description: "",
@@ -86,7 +87,7 @@ function AddPropertyContent() {
     e.preventDefault()
     const { hasErrors } = form.validate();
     if (step === 2) {
-      if (!form.values.imageUrl) {
+      if (images.length === 0) {
         setErrorImg(true);
         setStep(2)
         return; 
@@ -113,13 +114,13 @@ function AddPropertyContent() {
         {
           cloudName: "dcbeluo20",
           uploadPreset: "mfdrpo5g",
-          maxFiles: 1,
+          maxFiles: 8,
         },
         (err, result) => {
           if (err) {
             console.error(err);
           } else if (result.event === "success") {
-            form.setFieldValue("imageUrl", result.info.secure_url);
+            setImages((prevImages) => [...prevImages, result.info.secure_url]);
           }
         }
       );
@@ -132,15 +133,21 @@ function AddPropertyContent() {
 
   
   const handleImageUpload = () => {
-    if (!form.values.imageUrl) {
-      widgetRef.current?.open();
-    }
+    widgetRef.current?.open();
   };
+
+  const handleDeleteImg = (index) => {
+    if(index !== -1) {
+      const newImages = [...images]
+      newImages.splice(index, 1)
+      setImages(newImages)
+    }
+  }
 
   const handleSubmit = () => {
     const { hasErrors } = form.validate();
     if (!hasErrors) {
-      addProperty(form.values).unwrap().then((result) => {
+      addProperty({...form.values, images}).unwrap().then((result) => {
         toast.success(result.message)
         navigate("/")
       }).catch((error) => {
@@ -192,12 +199,21 @@ function AddPropertyContent() {
 
         {step === 2 && (
           <>
-            <h2 className="text-2xl md:text-3xl font-medium text-center">
-              Upload Image
+            
+            {images.length <= 0 || images.length >= 8 ? (
+              <h2 className="text-2xl md:text-3xl font-medium text-center">
+              Upload Images
             </h2>
+            ) : (
+              <div className="cursor-pointer flex items-center justify-center gap-2 text-xl font-medium text-center text-primaryColor"
+              onClick={handleImageUpload}>
+                <AiOutlineCloudUpload />
+               Upload More
+            </div>
+            )}
 
-            <div className="w-full h-full flex items-center justify-center flex-col mt-4 gap-6">
-              {!form.values.imageUrl ? (
+            <div className="w-full h-full flex items-center justify-center flex-col mt-4 gap-6 overflow-hidden">
+              {images.length === 0 ? (
                 <div
                   className={`w-full h-[260px] border-2 border-dashed ${errorImg ? "border-red-500 text-red-500" : "border-primaryColor text-primaryColor"} flex flex-col items-center justify-center cursor-pointer`}
                   onClick={handleImageUpload}
@@ -206,15 +222,21 @@ function AddPropertyContent() {
                   <span>Upload Image</span>
                 </div>
               ) : (
-                <div
-                  className="w-full h-[cover] max-h-[24rem]  rounded-lg overflow-hidden cursor-pointer"
-                  onClick={handleImageUpload}
+                <div className="w-full h-full flex flex-wrap items-center justify-center gap-2 sm:gap-3" >
+                {images.map((img, i) => (
+                  <div
+                  key={i}
+                  className="w-[118px] sm:w-[140px] h-[80px] rounded-lg cursor-pointer relative group overflow-hidden"
+                  onClick={() => handleDeleteImg(i)}
                 >
                   <img
-                    src={form.values.imageUrl}
+                    src={img}
                     alt=""
                     className="w-full h-full bg-center bg-cover bg-no-repeat object-cover"
                   />
+                  <div className="group-hover:flex hidden absolute top-0 left-0 bg-[rgba(0,0,0,0.4)] w-full h-full items-center justify-center text-white text-xl"><IoClose/></div>
+                </div>
+                ))}
                 </div>
               )}
             </div>

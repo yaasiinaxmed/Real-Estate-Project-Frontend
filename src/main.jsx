@@ -12,6 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 
 // mantine ui
 import "@mantine/core/styles.css";
+import '@mantine/carousel/styles.css';
 import { MantineProvider } from "@mantine/core";
 
 // redux

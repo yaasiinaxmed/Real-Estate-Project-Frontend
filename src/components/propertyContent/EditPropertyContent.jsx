@@ -16,6 +16,7 @@ import {
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import useCountries from "../../hooks/useCountries";
+import { IoClose } from "react-icons/io5";
 
 const propertyTypes = ["Select Property Type", "House", "Villa", "Apartment"];
 
@@ -30,12 +31,12 @@ function AddPropertyContent() {
 
   const { getCountries } = useCountries();
   const [property, setProperty] = useState({});
+  const [images, setImages ] = useState([])
 
   const getInitialFormValues = () => ({
     country: property ? property.country : "",
     city: property ? property.city : "",
     address: property ? property.address : "",
-    imageUrl: property ? property.imageUrl : "",
     title: property ? property.title : "",
     type: property ? property.type : "",
     description: property ? property.description : "",
@@ -54,8 +55,11 @@ function AddPropertyContent() {
   useEffect(() => {
     if (property) {
       form.setValues(getInitialFormValues(property));
+      setImages(property.images)
     }
   }, [property]);
+
+  console.log("images:", images)
 
   const form = useForm({
     initialValues: getInitialFormValues(),
@@ -111,7 +115,7 @@ function AddPropertyContent() {
     const { hasErrors } = form.validate();
   
     if (step === 2) {
-      if (!form.values.imageUrl) {
+      if (images.length < 0) {
         setErrorImg(true);
         return;
       }
@@ -142,7 +146,7 @@ function AddPropertyContent() {
           if (err) {
             console.error(err);
           } else if (result.event === "success") {
-            form.setFieldValue("imageUrl", result.info.secure_url);
+            setImages((prevImages) => [...prevImages, result.info.secure_url]);
             setErrorImg(false);
           }
         }
@@ -155,16 +159,11 @@ function AddPropertyContent() {
   }, []);
 
   const handleImageUpload = () => {
-    if (!form.values.imageUrl) {
-      setErrorImg(true);
-      setStep(2);
-    } else {
-      widgetRef.current?.open();
-    }
+    widgetRef.current?.open();
   };
 
   const handleSubmit = () => {
-    editProperty({ propertyData: form.values, id })
+    editProperty({ propertyData: {...form.values, images}, id })
       .unwrap()
       .then((result) => {
         toast.success(result.message);
@@ -218,12 +217,20 @@ function AddPropertyContent() {
 
         {step === 2 && (
           <>
-            <h2 className="text-2xl md:text-3xl font-medium text-center">
-              Upload Image
+            {images.length <= 0 || images.length >= 8 ? (
+              <h2 className="text-2xl md:text-3xl font-medium text-center">
+              Upload Images
             </h2>
+            ) : (
+              <div className="cursor-pointer flex items-center justify-center gap-2 text-xl font-medium text-center text-primaryColor"
+              onClick={handleImageUpload}>
+                <AiOutlineCloudUpload />
+               Upload More
+            </div>
+            )}
 
             <div className="w-full h-full flex itmes-center justify-center flex-col mt-4 gap-6">
-              {!form.values.imageUrl ? (
+              {images.length < 0 ? (
                 <div
                   className={`w-full h-[260px] border-2 border-dashed ${
                     errorImg
@@ -236,15 +243,21 @@ function AddPropertyContent() {
                   <span>Upload Image</span>
                 </div>
               ) : (
-                <div
-                  className="w-full h-[cover] max-h-[24rem]  rounded-lg overflow-hidden cursor-pointer"
-                  onClick={handleImageUpload}
+                <div className="w-full h-full flex flex-wrap items-center justify-center gap-2 sm:gap-3" >
+                {images.map((img, i) => (
+                  <div
+                  key={i}
+                  className="w-[118px] sm:w-[140px] h-[80px] rounded-lg cursor-pointer relative group overflow-hidden"
+                  onClick={() => handleDeleteImg(i)}
                 >
                   <img
-                    src={form.values.imageUrl}
+                    src={img}
                     alt=""
                     className="w-full h-full bg-center bg-cover bg-no-repeat object-cover"
                   />
+                  <div className="group-hover:flex hidden absolute top-0 left-0 bg-[rgba(0,0,0,0.4)] w-full h-full items-center justify-center text-white text-xl"><IoClose/></div>
+                </div>
+                ))}
                 </div>
               )}
             </div>

@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/carousel": "^7.2.2",
     "@mantine/core": "^7.2.2",
     "@mantine/form": "^7.2.2",
     "@mantine/hooks": "^7.2.2",
     "@reduxjs/toolkit": "^1.9.7",
     "date-fns": "^2.30.0",
+    "embla-carousel-autoplay": "^7.1.0",
+    "embla-carousel-react": "^7.1.0",
     "esri-leaflet-geocoder": "^2.3.3",
     "js-cookie": "^3.0.5",
     "leaflet": "^1.9.4",

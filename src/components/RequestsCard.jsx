@@ -2,21 +2,25 @@ import React from "react";
 import { ImLocation2 } from "react-icons/im";
 import { FaBath } from "react-icons/fa";
 import { IoBed } from "react-icons/io5";
-import { Badge, NumberFormatter, Text } from "@mantine/core";
+import { Badge, Image, NumberFormatter, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
+import { Carousel } from "@mantine/carousel";
 
 function RequestsCard({ request }) {
+
+  const slides = request?.property?.images.map((img, i) => (
+    <Carousel.Slide key={i}>
+      <Image src={img} height={220} />
+    </Carousel.Slide>
+  ))
+  
   return (
     <Link to={`/your-requests/${request?._id}/${request?.property?.title.toLowerCase().split(" ").join("-")}`}
      className="card w-[340px] bg-white flex flex-col shadow-[0px_0px_12px_rgb(0,0,0,0.1)] rounded-lg overflow-hidden duration-100 hover:scale-105 ">
       {/* image */}
-      <figure className="relative w-full h-[200px]">
-        {/* Badge */}
-        {request?.property?.type.toLowerCase() === "for sell" && (
-          <div className="absolute top-2 right-3"><Badge className='!capitalize !font-medium'>For Sell</Badge></div>
-        )}
-        <img src={request?.property?.imageUrl} alt="" className="w-full h-full" />
-      </figure>
+      <Carousel withIndicators height={200}>
+       {slides}
+      </Carousel>
       {/* Details */}
       <div className="mt-1 flex flex-col gap-3 p-4">
         <h2 className="text-xl flex items-center gap-2 text-HeadingColor">
