@@ -12,7 +12,7 @@ function PropertyCard({ property }) {
 
   const slides = property.images.map((img, i) => (
     <Carousel.Slide key={i} >
-      <Image src={img} height={220} />
+      <Image src={img} className="w-full h-full !bg-cover !bg-center !bg-no-repeat !object-center"/>
     </Carousel.Slide>
   ));
 
@@ -33,6 +33,7 @@ function PropertyCard({ property }) {
         plugins={[autoplay.current]}
         onMouseEnter={autoplay.current.stop}
         onMouseLeave={autoplay.current.reset}
+        className="w-full h-[cover] max-h-[200px]"
       >
         {slides}
       </Carousel>

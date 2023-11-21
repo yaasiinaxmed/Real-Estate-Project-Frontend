@@ -5,7 +5,7 @@ import heroImg from "../../assets/hero.jpg";
 function Hero() {
   return (
     <section
-      className="w-full h-[80vh] bg-cover bg-center bg-no-repeat"
+      className="w-full h-[70vh] bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${heroImg})` }}
     >
       <div className="container  h-full flex items-center justify-center flex-col gap-2">

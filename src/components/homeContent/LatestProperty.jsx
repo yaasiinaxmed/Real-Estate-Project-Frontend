@@ -7,7 +7,7 @@ function LatestProperty() {
   const { data: properties = [], isLoading } = useGetPropertiesQuery();
 
   return (
-    <section>
+    <section className="pt-0">
       <div className="container flex flex-col items-center ">
         {/* Title */}
         <h2 className="text-center text-2xl font-medium text-HeadingColor">
