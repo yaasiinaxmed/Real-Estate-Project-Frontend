@@ -16,7 +16,15 @@ function RequestsCard({ request }) {
   
   return (
     <Link to={`/your-requests/${request?._id}/${request?.property?.title.toLowerCase().split(" ").join("-")}`}
-     className="card w-[340px] bg-white flex flex-col shadow-[0px_0px_12px_rgb(0,0,0,0.1)] rounded-lg overflow-hidden duration-100 hover:scale-105 ">
+     className="card w-[340px] bg-white flex flex-col shadow-[0px_0px_12px_rgb(0,0,0,0.1)] relative rounded-lg overflow-hidden duration-100 hover:scale-105 ">
+       {/* Badge for sell */}
+       {request?.property?.type.toLowerCase() === 'for sell' && (
+          <Badge
+          className="z-50 absolute top-2 right-3 !capitalize !font-medium"
+        >
+          For Sell
+        </Badge>
+        )}
       {/* image */}
       <Carousel withIndicators height={200}>
        {slides}

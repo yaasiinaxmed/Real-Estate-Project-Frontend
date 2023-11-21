@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Avatar, Badge, Group, Image, NumberFormatter, Text } from "@mantine/core";
+import {
+  Avatar,
+  Badge,
+  Group,
+  Image,
+  NumberFormatter,
+  Text,
+} from "@mantine/core";
 import { ImLocation2 } from "react-icons/im";
 import { HiHome } from "react-icons/hi2";
 import { FaBath } from "react-icons/fa";
@@ -58,23 +65,18 @@ function PropertyDetails() {
       });
   };
 
-  const images = [
-    "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
-    "https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
-    "https://images.unsplash.com/photo-1605774337664-7a846e9cdf17?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
-    "https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
-    "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
-  ];
-
   const slides = property.images.map((img) => (
     <Carousel.Slide key={img}>
-      <Image src={img}  className="w-full h-full !bg-cover !bg-center !bg-no-repeat !object-center"/>
+      <Image
+        src={img}
+        className="w-full h-full !bg-cover !bg-center !bg-no-repeat !object-center"
+      />
     </Carousel.Slide>
   ));
 
   return (
     <section className="relative">
-      <div className="container">
+      <div className="container relative">
         {isLoading ? (
           <div className="py-[14rem] flex gap-2 items-center justify-center ">
             <span className="w-6 h-6 rounded-full border-2 border-primaryColor border-l-white animate-spin"></span>
@@ -82,23 +84,20 @@ function PropertyDetails() {
           </div>
         ) : (
           <>
-            {/* cover img 
-        <figure className="w-full cover-img h-[cover] max-h-[700px]  relative overflow-hidden !rounded-2xl ">
-        {/* Badge Availabe status 
-        <div className="absolute top-2 left-3">
-          <Badge color={property.available ? "lime" : "red"} className='!capitalize !font-medium'>
-            {property.available ? "Available" : "Unavailable"}
-          </Badge>
-        </div>
-        {/* img 
-        <img
-          src={property.imageUrl}
-          alt=""
-          className="w-full h-full !bg-cover !bg-center !bg-no-repeat !object-center"
-        />
-      </figure> */}
-
-            <Carousel withIndicators className="!bg-cover img h-auto max-h-[300px] sm:max-h-[550px] xl:max-h-[750px] rounded-2xl overflow-hidden">
+            {/* Badge Available */}
+            <div className="badge z-40 absolute top-2 left-[3rem] md:left-[4rem] lg:left-[5rem] xl:left-[7rem]">
+              <Badge
+                color={property.available ? "lime" : "red"}
+                className="!capitalize !font-medium"
+              >
+                {property.available ? "Available" : "Unavailable"}
+              </Badge>
+            </div>
+            {/* Cover Img */}
+            <Carousel
+              withIndicators
+              className="!bg-cover img h-auto max-h-[300px] sm:max-h-[550px] xl:max-h-[750px] rounded-2xl overflow-hidden"
+            >
               {slides}
             </Carousel>
             {/* Details */}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Avatar, Badge, Group, NumberFormatter, Text } from "@mantine/core";
+import { Avatar, Badge, Group, Image, NumberFormatter, Text } from "@mantine/core";
 import { ImLocation2 } from "react-icons/im";
 import { HiHome } from "react-icons/hi2";
 import { FaBath } from "react-icons/fa";
@@ -13,6 +13,7 @@ import {
 import { useGetUserQuery } from "../../store/api/UserSlice";
 import toast from "react-hot-toast";
 import { formatDistanceToNow } from "date-fns";
+import { Carousel } from "@mantine/carousel";
 
 function RequestDetails() {
   const { data: requests = [], error, isLoading } = useGetRequestsQuery();
@@ -38,10 +39,19 @@ function RequestDetails() {
         toast.error(error.data.message);
       });
   };
+  
+  const slides = request?.property?.images.map((img) => (
+    <Carousel.Slide key={img}>
+      <Image
+        src={img}
+        className="w-full h-full !bg-cover !bg-center !bg-no-repeat !object-center"
+      />
+    </Carousel.Slide>
+  ));
 
   return (
     <section>
-      <div className="container">
+      <div className="container relative">
         {isLoading ? (
           <div className="py-[14rem] flex gap-2 items-center justify-center ">
             <span className="w-6 h-6 rounded-full border-2 border-primaryColor border-l-white animate-spin"></span>
@@ -49,21 +59,22 @@ function RequestDetails() {
           </div>
         ) : (
           <>
-            {/* cover img */}
-            <figure className="w-full cover-img h-[cover] max-h-[700px]  relative overflow-hidden !rounded-2xl ">
-              {/* Badge Availabe status */}
-              <div className="absolute top-2 left-3">
-                <Badge color={request?.property?.available ? "lime" : "red"} className='!capitalize !font-medium'>
-                  {request?.property?.available ? "Available" : "Unavailable"}
-                </Badge>
-              </div>
-              {/* img */}
-              <img
-                src={request?.property?.imageUrl}
-                alt=""
-                className="w-full h-full !bg-cover !bg-center !bg-no-repeat !object-center"
-              />
-            </figure>
+            {/* Badge Available */}
+            <div className="badge z-40 absolute top-2 left-[3rem] md:left-[4rem] lg:left-[5rem] xl:left-[7rem]">
+              <Badge
+                color={request?.property?.available ? "lime" : "red"}
+                className="!capitalize !font-medium"
+              >
+                {request?.property?.available ? "Available" : "Unavailable"}
+              </Badge>
+            </div>
+            {/* Cover Img */}
+            <Carousel
+              withIndicators
+              className="!bg-cover img h-auto max-h-[300px] sm:max-h-[550px] xl:max-h-[750px] rounded-2xl overflow-hidden"
+            >
+              {slides}
+            </Carousel>
             {/* Details */}
             <div className="flex flex-col xl:flex-row justify-between mt-4 gap-4">
               {/* info */}
