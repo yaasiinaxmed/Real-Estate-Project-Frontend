@@ -112,9 +112,9 @@ function AddPropertyContent() {
       cloudinaryRef.current = window.cloudinary;
       widgetRef.current = cloudinaryRef.current.createUploadWidget(
         {
-          cloudName: "dcbeluo20",
-          uploadPreset: "mfdrpo5g",
-          maxFiles: 20,
+          cloudName: import.meta.env.VITE_APP_CLOUD_NAME,
+          uploadPreset: import.meta.env.VITE_APP_UPLOAD_PRESET,
+          maxFiles: 30,
         },
         (err, result) => {
           if (err) {
@@ -200,7 +200,7 @@ function AddPropertyContent() {
         {step === 2 && (
           <>
             
-            {images.length <= 0 || images.length >= 8 ? (
+            {images.length <= 0 || images.length >= 30 ? (
               <h2 className="text-2xl md:text-3xl font-medium text-center">
               Upload Images
             </h2>

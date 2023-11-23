@@ -22,8 +22,8 @@ function EditProfileContent() {
     cloudinaryRef.current = window.cloudinary;
     widgetRef.current = cloudinaryRef.current.createUploadWidget(
       {
-        cloudName: "dcbeluo20",
-        uploadPreset: "mfdrpo5g",
+        cloudName: import.meta.env.VITE_APP_CLOUD_NAME,
+        uploadPreset: import.meta.env.VITE_APP_UPLOAD_PRESET,
         maxFiles: 1,
       },
       (err, result) => {
