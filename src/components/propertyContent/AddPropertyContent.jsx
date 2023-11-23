@@ -114,7 +114,7 @@ function AddPropertyContent() {
         {
           cloudName: "dcbeluo20",
           uploadPreset: "mfdrpo5g",
-          maxFiles: 8,
+          maxFiles: 20,
         },
         (err, result) => {
           if (err) {

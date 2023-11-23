@@ -12,6 +12,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import {
   useEditPropertyMutation,
   useGetPropertiesQuery,
+  useUpdateImagesMutation,
 } from "../../store/api/PropertySlice";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
@@ -22,6 +23,7 @@ const propertyTypes = ["Select Property Type", "House", "Villa", "Apartment"];
 
 function AddPropertyContent() {
   const { data: properties = [], isLoading } = useGetPropertiesQuery();
+  const [updateImages] = useUpdateImagesMutation();
   const [editProperty] = useEditPropertyMutation();
 
   const [step, setStep] = useState(1);
@@ -31,7 +33,7 @@ function AddPropertyContent() {
 
   const { getCountries } = useCountries();
   const [property, setProperty] = useState({});
-  const [images, setImages ] = useState([])
+  const [images, setImages] = useState([]);
 
   const getInitialFormValues = () => ({
     country: property ? property.country : "",
@@ -58,8 +60,6 @@ function AddPropertyContent() {
       setImages(property.images)
     }
   }, [property]);
-
-  console.log("images:", images)
 
   const form = useForm({
     initialValues: getInitialFormValues(),
@@ -115,7 +115,7 @@ function AddPropertyContent() {
     const { hasErrors } = form.validate();
   
     if (step === 2) {
-      if (images.length < 0) {
+      if (images.length === 0) {
         setErrorImg(true);
         return;
       }
@@ -140,7 +140,7 @@ function AddPropertyContent() {
         {
           cloudName: "dcbeluo20",
           uploadPreset: "mfdrpo5g",
-          maxFiles: 1,
+          maxFiles: 20,
         },
         (err, result) => {
           if (err) {
@@ -162,8 +162,18 @@ function AddPropertyContent() {
     widgetRef.current?.open();
   };
 
+  const handleDeleteImg = (imageURL) => {
+    const index = images.indexOf(imageURL);
+    if (index !== -1) {
+      const newImages = [...images];
+      newImages.splice(index, 1);
+      updateImages({ images: newImages, id })
+        .unwrap()
+    }
+  };
+
   const handleSubmit = () => {
-    editProperty({ propertyData: {...form.values, images}, id })
+    editProperty({ propertyData: { ...form.values, images }, id })
       .unwrap()
       .then((result) => {
         toast.success(result.message);
@@ -219,18 +229,20 @@ function AddPropertyContent() {
           <>
             {images.length <= 0 || images.length >= 8 ? (
               <h2 className="text-2xl md:text-3xl font-medium text-center">
-              Upload Images
-            </h2>
+                Upload Images
+              </h2>
             ) : (
-              <div className="cursor-pointer flex items-center justify-center gap-2 text-xl font-medium text-center text-primaryColor"
-              onClick={handleImageUpload}>
+              <div
+                className="cursor-pointer flex items-center justify-center gap-2 text-xl font-medium text-center text-primaryColor"
+                onClick={handleImageUpload}
+              >
                 <AiOutlineCloudUpload />
-               Upload More
-            </div>
+                Upload More
+              </div>
             )}
 
             <div className="w-full h-full flex itmes-center justify-center flex-col mt-4 gap-6">
-              {images.length < 0 ? (
+              {images.length === 0 ? (
                 <div
                   className={`w-full h-[260px] border-2 border-dashed ${
                     errorImg
@@ -243,21 +255,23 @@ function AddPropertyContent() {
                   <span>Upload Image</span>
                 </div>
               ) : (
-                <div className="w-full h-full flex flex-wrap items-center justify-center gap-2 sm:gap-3" >
-                {images.map((img, i) => (
-                  <div
-                  key={i}
-                  className="w-[118px] sm:w-[140px] h-[80px] rounded-lg cursor-pointer relative group overflow-hidden"
-                  onClick={() => handleDeleteImg(i)}
-                >
-                  <img
-                    src={img}
-                    alt=""
-                    className="w-full h-full bg-center bg-cover bg-no-repeat object-cover"
-                  />
-                  <div className="group-hover:flex hidden absolute top-0 left-0 bg-[rgba(0,0,0,0.4)] w-full h-full items-center justify-center text-white text-xl"><IoClose/></div>
-                </div>
-                ))}
+                <div className="w-full h-full flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+                  {images.map((img, i) => (
+                    <div
+                      key={i}
+                      className="w-[118px] sm:w-[140px] h-[80px] rounded-lg cursor-pointer relative group overflow-hidden"
+                      onClick={() => handleDeleteImg(img)}
+                    >
+                      <img
+                        src={img}
+                        alt=""
+                        className="w-full h-full bg-center bg-cover bg-no-repeat object-cover"
+                      />
+                      <div className="group-hover:flex hidden absolute top-0 left-0 bg-[rgba(0,0,0,0.4)] w-full h-full items-center justify-center text-white text-xl">
+                        <IoClose />
+                      </div>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>

@@ -38,6 +38,16 @@ export const propertySlice = createApi({
       invalidatesTags: ["property"],
     }),
 
+     // Update property images 
+     updateImages: builder.mutation({
+      query: ({ images, id }) => ({
+        url: `properties/update_images/${id}`,
+        method: "PUT",
+        body: images,
+      }),
+      invalidatesTags: ["property"],
+    }),
+
     // Update property
     editProperty: builder.mutation({
       query: ({ propertyData, id }) => ({
@@ -118,5 +128,6 @@ export const {
   useApproveMutation,
   useGetTransactionsQuery,
   useContactOwnerMutation,
-  useContactRenterMutation
+  useContactRenterMutation,
+  useUpdateImagesMutation
 } = propertySlice;

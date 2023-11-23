@@ -65,7 +65,7 @@ function PropertyDetails() {
       });
   };
 
-  const slides = property.images.map((img) => (
+  const slides = property?.images?.map((img) => (
     <Carousel.Slide key={img}>
       <Image
         src={img}
