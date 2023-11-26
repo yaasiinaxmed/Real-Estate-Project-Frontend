@@ -3,12 +3,10 @@ import { ImLocation2 } from "react-icons/im";
 import { FaBath } from "react-icons/fa";
 import { IoBed } from "react-icons/io5";
 import { Badge, NumberFormatter, Text, Image } from "@mantine/core";
-import Autoplay from "embla-carousel-autoplay";
 import { Carousel } from "@mantine/carousel";
 import { Link } from "react-router-dom";
 
 function PropertyCard({ property }) {
-  const autoplay = useRef(Autoplay({ delay: 4000 }));
 
   const slides = property.images.map((img, i) => (
     <Carousel.Slide key={i} >
@@ -30,9 +28,6 @@ function PropertyCard({ property }) {
       <Carousel
         withIndicators
         height={200}
-        plugins={[autoplay.current]}
-        onMouseEnter={autoplay.current.stop}
-        onMouseLeave={autoplay.current.reset}
         className="w-full h-[cover] max-h-[200px]"
       >
         {slides}
